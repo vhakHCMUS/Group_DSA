@@ -221,3 +221,178 @@ void quickSort(int* array, int low, int high, int &count_assign, int& count_comp
         quickSort(array,pi+1,high,count_assign,count_compare);
     }
 }
+
+//mergeSort and count the number of assignments and comparisons
+void merge(int* array, int l, int m, int r, int &count_assign, int& count_compare)
+{
+    int n1=m-l+1;
+    int n2=r-m;
+    int* L=new int[n1];
+    int* R=new int[n2];
+    for(int i=0;i<n1;i++)
+    {
+        count_compare++;
+        L[i]=array[l+i];
+        count_assign++;
+    }
+    for(int i=0;i<n2;i++)
+    {
+        count_compare++;
+        R[i]=array[m+1+i];
+        count_assign++;
+    }
+    int i=0;
+    int j=0;
+    int k=l;
+    while(i<n1&&j<n2)
+    {
+        count_compare+=3;
+        if(L[i]<=R[j])
+        {
+            array[k]=L[i];
+            i++;
+            count_assign+=2;
+        }
+        else
+        {
+            array[k]=R[j];
+            j++;
+            count_assign+=2;
+        }
+        k++;
+        count_assign++;
+    }
+    while(i<n1)
+    {
+        count_compare++;
+        array[k]=L[i];
+        i++;
+        k++;
+        count_assign+=3;
+    }
+    while(j<n2)
+    {
+        count_compare++;
+        array[k]=R[j];
+        j++;
+        k++;
+        count_assign+=3;
+    }
+    delete[] L;
+    delete[] R;
+}
+
+//write radixSort and count the number of assignments and comparisons
+void radixSort(int* array, int size, int &count_assign, int& count_compare)
+{
+    int max=array[0];
+    for(int i=1;i<size;i++)
+    {
+        count_compare+=2;
+        if(array[i]>max)
+        {
+            max=array[i];
+            count_assign++;
+        }
+    }
+    for(int exp=1;max/exp>0;exp*=10)
+    {
+        int* output=new int[size];
+        int count[10]={0};
+        count_assign++;
+        count_compare++;
+        for(int i=0;i<size;i++)
+        {
+            count_compare++;
+            count[(array[i]/exp)%10]++;
+            count_assign++;
+        }
+        for(int i=1;i<10;i++)
+        {
+            count_compare++;
+            count[i]+=count[i-1];
+            count_assign++;
+        }
+        for(int i=size-1;i>=0;i--)
+        {
+            count_compare++;
+            output[count[(array[i]/exp)%10]-1]=array[i];
+            count[(array[i]/exp)%10]--;
+            count_assign+=2;
+        }
+        for(int i=0;i<size;i++)
+        {
+            count_compare++;
+            array[i]=output[i];
+            count_assign++;
+        }
+        delete[] output;
+    }
+}
+
+//write shellSort and count the number of assignments and comparisons
+void shellSort(int* array, int size, int &count_assign, int& count_compare)
+{
+    for(int gap=size/2;gap>0;gap/=2)
+    {
+        count_compare++;
+        for(int i=gap;i<size;i++)
+        {
+            int temp=array[i];
+            int j;
+            count_assign+=2;
+            for(j=i;j>=gap&&array[j-gap]>temp;j-=gap)
+            {
+                count_compare+=2;
+                array[j]=array[j-gap];
+                count_assign++;
+            }
+            array[j]=temp;
+            count_assign++;
+        }
+    }
+}
+
+//write shakerSort and count the number of assignments and comparisons
+void shakerSort(int* array, int size, int &count_assign, int& count_compare)
+{
+    bool swapped=true;
+    int start=0;
+    int end=size-1;
+    while(swapped)
+    {
+        swapped=false;
+        count_compare++;
+        count_assign++;
+        for(int i=start;i<end;i++)
+        {
+            count_compare+=2;
+            if(array[i]>array[i+1])
+            {
+                swap(array[i],array[i+1]);
+                swapped=true;
+                count_assign+=3;
+            }
+        }
+        if(!swapped)
+        {
+            count_compare++;
+            break;
+        }
+        swapped=false;
+        end--;
+        count_assign++;
+        for(int i=end-1;i>=start;i--)
+        {
+            count_compare+=2;
+            if(array[i]>array[i+1])
+            {
+                swap(array[i],array[i+1]);
+                swapped=true;
+                count_assign+=3;
+            }
+        }
+        start++;
+        count_assign++;
+    }
+}

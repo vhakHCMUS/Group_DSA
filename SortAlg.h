@@ -14,3 +14,11 @@ void radixSort(int* array, int size, int &count_assign, int& count_compare);
 
 void quickSort(int* array, int size, int &count_assign, int& count_compare);
 
+void mergeSort(int* array, int size, int &count_assign, int& count_compare);
+
+void radixSort(int* array, int size, int &count_assign, int& count_compare);
+
+void shellSort(int* array, int size, int &count_assign, int& count_compare);
+
+void shakerSort(int* array, int size, int &count_assign, int& count_compare);
+
