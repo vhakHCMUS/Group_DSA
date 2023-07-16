@@ -5,11 +5,14 @@ using namespace std;
 
 void selectionSort(int* array, int size, int &count_assign, int& count_compare)
 {
-    for(int i=0;i<size-1;i++)
+	count_assign=0;
+	count_compare=0;
+	count_assign++;
+    for(int i=0; count_compare++,i<size-1;count_assign++,i++)
     {
         int min=i;
-        count_compare++;
-        for(int j=i+1;j<size;j++)
+        count_assign+=2;
+        for(int j=i+1;count_compare++,j<size;count_assign++,j++)
         {
             count_compare++;
             if(array[j]<array[min])
@@ -26,18 +29,19 @@ void selectionSort(int* array, int size, int &count_assign, int& count_compare)
 //write selectionSort and count the number of assignments and comparisons
 void insertionSort(int* array, int size, int &count_assign, int& count_compare)
 {
-    for(int i=1;i<size;i++)
+	count_assign=0;
+	count_compare=0;
+	count_assign++;
+    for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
-        count_compare++;
         int key=array[i];
         int j=i-1;
         count_assign+=2;
-        while(j>=0&&array[j]>key)
+        while((count_compare++ &&j>=0)&&(count_compare++&&array[j]>key))
         {
             array[j+1]=array[j];
             j--;
             count_assign+=2;
-            count_compare++;
         }
         array[j+1]=key;
         count_assign++;
@@ -47,10 +51,13 @@ void insertionSort(int* array, int size, int &count_assign, int& count_compare)
 //write bubbleSort and count the number of assignments and comparisons
 void bubbleSort(int* array, int size, int &count_assign, int& count_compare)
 {
-    for(int i=0;i<size-1;i++)
+	count_assign=0;
+	count_compare=0;
+	count_assign++;
+    for(int i=0;count_compare++,i<size-1;count_assign++,i++)
     {
-        count_compare++;
-        for(int j=0;j<size-i-1;j++)
+        count_assign++;
+        for(int j=0;count_compare++,j<size-i-1;count_assign++,j++)
         {
             count_compare++;
             if(array[j]>array[j+1])
@@ -68,6 +75,7 @@ void heapify(int* array, int size, int i, int &count_assign, int& count_compare)
     int largest=i;
     int l=2*i+1;
     int r=2*i+2;
+    count_assign+=3
     count_compare+=2;
     if(l<size&&array[l]>array[largest])
     {
@@ -84,15 +92,17 @@ void heapify(int* array, int size, int i, int &count_assign, int& count_compare)
     if(largest!=i)
     {
         swap(array[i],array[largest]);
-        count_assign+=3;
+        count_assign+=4;
         heapify(array,size,largest,count_assign,count_compare);
     }
 }
 void heapSort(int* array, int size, int &count_assign, int& count_compare)
 {
-    for(int i=size/2-1;i>=0;i--)
+	count_assign=0;
+	count_compare=0;
+	count_assign++;
+    for(int i=size/2-1;count_compare++,i>=0;count_assign++,i--)
     {
-        count_compare++;
         heapify(array,size,i,count_assign,count_compare);
     }
     for(int i=size-1;i>=0;i--)
@@ -106,10 +116,13 @@ void heapSort(int* array, int size, int &count_assign, int& count_compare)
 //write countingSort and count the number of assignments and comparisons
 void countingSort(int* array, int size, int &count_assign, int& count_compare)
 {
+	count_assign=0;
+	count_compare=0;
     int max=array[0];
-    for(int i=1;i<size;i++)
+    count_assign+=2;
+    for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
-        count_compare+=2;
+        count_compare++;
         if(array[i]>max)
         {
             max=array[i];
@@ -117,27 +130,28 @@ void countingSort(int* array, int size, int &count_assign, int& count_compare)
         }
     }
     int* count=new int[max+1];
-    for(int i=0;i<max+1;i++)
+    count_assign+=2;
+    for(int i=0;count_compare++,i<max+1;count_assign++,i++)
     {
-        count_compare++;
         count[i]=0;
         count_assign++;
     }
-    for(int i=0;i<size;i++)
+    count_assign++;
+    for(int i=0;count_compare++,i<size;count_assign++,i++)
     {
         count[array[i]]++;
         count_assign++;
     }
     int index=0;
-    for(int i=0;i<max+1;i++)
+    count_assign+=2;
+    for(int i=0;count_compare++,i<max+1;count_assign++,i++)
     {
-        count_compare++;
-        while(count[i]>0)
+        while(count_compare++&&count[i]>0)
         {
             array[index]=i;
             index++;
             count[i]--;
-            count_assign+=2;
+            count_assign+=3;
         }
     }
     delete[] count;
@@ -146,44 +160,45 @@ void countingSort(int* array, int size, int &count_assign, int& count_compare)
 //write radixSort and count the number of assignments and comparisons
 void radixSort(int* array, int size, int &count_assign, int& count_compare)
 {
+	count_assign=0;
+	count_compare=0;
     int max=array[0];
-    for(int i=1;i<size;i++)
+    count_assign+=2;
+    for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
-        count_compare++;
-        if(array[i]>max)
+        if(count_compare++ && array[i]>max)
         {
             max=array[i];
             count_assign++;
         }
     }
-    for(int exp=1;max/exp>0;exp*=10)
+    count_assign++;
+    for(int exp=1;count_compare++,max/exp>0;count_assign++,exp*=10)
     {
         int* output=new int[size];
         int count[10]={0};
-        count_assign++;
-        count_compare++;
-        for(int i=0;i<size;i++)
+        count_assign+=3;
+        for(int i=0;count_compare++,i<size;count_assign++,i++)
         {
-            count_compare++;
             count[(array[i]/exp)%10]++;
             count_assign++;
         }
-        for(int i=1;i<10;i++)
+        count_assign++;
+        for(int i=1;count_compare++,i<10;count_assign++,i++)
         {
-            count_compare++;
             count[i]+=count[i-1];
             count_assign++;
         }
-        for(int i=size-1;i>=0;i--)
+        count_assign++;
+        for(int i=size-1;count_compare++,i>=0;count_assign++,i--)
         {
-            count_compare++;
             output[count[(array[i]/exp)%10]-1]=array[i];
             count[(array[i]/exp)%10]--;
             count_assign+=2;
         }
-        for(int i=0;i<size;i++)
+        count_assign++;
+        for(int i=0;count_compare++,i<size;count_assign++,i++)
         {
-            count_compare++;
             array[i]=output[i];
             count_assign++;
         }
@@ -196,15 +211,14 @@ int partition(int* array, int low, int high, int &count_assign, int& count_compa
 {
     int pivot=array[high];
     int i=low-1;
-    count_assign+=2;
-    for(int j=low;j<=high-1;j++)
+    count_assign+=3;
+    for(int j=low;count_compare++,j<=high-1;count_assign++,j++)
     {
-        count_compare+=2;
-        if(array[j]<=pivot)
+        if(count_compare++ && array[j]<=pivot)
         {
             i++;
             swap(array[i],array[j]);
-            count_assign+=3;
+            count_assign+=4;
         }
     }
     swap(array[i+1],array[high]);
@@ -213,10 +227,12 @@ int partition(int* array, int low, int high, int &count_assign, int& count_compa
 }
 void quickSort(int* array, int low, int high, int &count_assign, int& count_compare)
 {
-    if(low<high)
+	count_assign=0;
+	count_compare=0;
+    if(count_compare++ && low<high)
     {
-        count_compare++;
         int pi=partition(array,low,high,count_assign,count_compare);
+        count_assign+=3;
         quickSort(array,low,pi-1,count_assign,count_compare);
         quickSort(array,pi+1,high,count_assign,count_compare);
     }
@@ -229,24 +245,25 @@ void merge(int* array, int l, int m, int r, int &count_assign, int& count_compar
     int n2=r-m;
     int* L=new int[n1];
     int* R=new int[n2];
-    for(int i=0;i<n1;i++)
+    count_assign+=5;
+    for(int i=0;count_compare++,i<n1;count_assign++,i++)
     {
-        count_compare++;
         L[i]=array[l+i];
         count_assign++;
     }
-    for(int i=0;i<n2;i++)
+    count_assign++;
+    for(int i=0;count_compare++,i<n2;count_assign++,i++)
     {
-        count_compare++;
         R[i]=array[m+1+i];
         count_assign++;
     }
     int i=0;
     int j=0;
     int k=l;
-    while(i<n1&&j<n2)
+    count_assign+=3;
+    while((count_compare++&&i<n1)&&(count_compare++&&j<n2))
     {
-        count_compare+=3;
+        count_compare++;
         if(L[i]<=R[j])
         {
             array[k]=L[i];
@@ -262,17 +279,15 @@ void merge(int* array, int l, int m, int r, int &count_assign, int& count_compar
         k++;
         count_assign++;
     }
-    while(i<n1)
+    while(count_compare++ && i<n1)
     {
-        count_compare++;
         array[k]=L[i];
         i++;
         k++;
         count_assign+=3;
     }
-    while(j<n2)
+    while(count_compare++ && j<n2)
     {
-        count_compare++;
         array[k]=R[j];
         j++;
         k++;
@@ -285,44 +300,45 @@ void merge(int* array, int l, int m, int r, int &count_assign, int& count_compar
 //write radixSort and count the number of assignments and comparisons
 void radixSort(int* array, int size, int &count_assign, int& count_compare)
 {
+	count_assign=0;
+	count_compare=0;
     int max=array[0];
-    for(int i=1;i<size;i++)
+    count_assign+=2;
+    for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
-        count_compare+=2;
-        if(array[i]>max)
+        if(count_compare++ && array[i]>max)
         {
             max=array[i];
             count_assign++;
         }
     }
-    for(int exp=1;max/exp>0;exp*=10)
+    count_assign++;
+    for(int exp=1;count_compare++,max/exp>0;count_assign++,exp*=10)
     {
         int* output=new int[size];
         int count[10]={0};
-        count_assign++;
-        count_compare++;
-        for(int i=0;i<size;i++)
+        count_assign+=3;
+        for(int i=0;count_compare++,i<size;count_assign++,i++)
         {
-            count_compare++;
             count[(array[i]/exp)%10]++;
             count_assign++;
         }
-        for(int i=1;i<10;i++)
+        count_assign++;
+        for(int i=1;count_compare++,i<10;count_assign++,i++)
         {
-            count_compare++;
             count[i]+=count[i-1];
             count_assign++;
         }
-        for(int i=size-1;i>=0;i--)
+        count_assign++;
+        for(int i=size-1;count_compare++,i>=0;count_assign++,i--)
         {
-            count_compare++;
             output[count[(array[i]/exp)%10]-1]=array[i];
             count[(array[i]/exp)%10]--;
             count_assign+=2;
         }
-        for(int i=0;i<size;i++)
+        count_assign++;
+        for(int i=0;count_compare++,i<size;count_assign++,i++)
         {
-            count_compare++;
             array[i]=output[i];
             count_assign++;
         }
@@ -333,17 +349,18 @@ void radixSort(int* array, int size, int &count_assign, int& count_compare)
 //write shellSort and count the number of assignments and comparisons
 void shellSort(int* array, int size, int &count_assign, int& count_compare)
 {
-    for(int gap=size/2;gap>0;gap/=2)
+	count_assign=0;
+	count_compare=0;
+	count_assign++;
+    for(int gap=size/2;count_compare++,gap>0;count_assign++,gap/=2)
     {
-        count_compare++;
-        for(int i=gap;i<size;i++)
+        for(int i=gap;count_compare++,i<size;count_assign++,i++)
         {
             int temp=array[i];
             int j;
-            count_assign+=2;
-            for(j=i;j>=gap&&array[j-gap]>temp;j-=gap)
+            count_assign+=3;
+            for(j=i;(count_compare++&&j>=gap)&&(count_compare++&&array[j-gap]>temp);count_assign++,j-=gap)
             {
-                count_compare+=2;
                 array[j]=array[j-gap];
                 count_assign++;
             }
@@ -356,40 +373,40 @@ void shellSort(int* array, int size, int &count_assign, int& count_compare)
 //write shakerSort and count the number of assignments and comparisons
 void shakerSort(int* array, int size, int &count_assign, int& count_compare)
 {
+	count_assign=0;
+	count_compare=0;
     bool swapped=true;
     int start=0;
     int end=size-1;
-    while(swapped)
+    count_assign+=3
+    while(count_compare++&&swapped)
     {
         swapped=false;
-        count_compare++;
-        count_assign++;
-        for(int i=start;i<end;i++)
+        count_assign+=2;
+        for(int i=start;count_compare++,i<end;count_assign++,i++)
         {
-            count_compare+=2;
-            if(array[i]>array[i+1])
+            if(count_compare++ && array[i]>array[i+1])
             {
                 swap(array[i],array[i+1]);
                 swapped=true;
-                count_assign+=3;
+                count_assign+=4;
             }
         }
-        if(!swapped)
+        if(count_compare++&&!swapped)
         {
-            count_compare++;
             break;
         }
         swapped=false;
         end--;
-        count_assign++;
-        for(int i=end-1;i>=start;i--)
+        count_assign+=3;
+        for(int i=end-1;count_compare++,i>=start;count_assign++,i--)
         {
-            count_compare+=2;
+            count_compare++;
             if(array[i]>array[i+1])
             {
                 swap(array[i],array[i+1]);
                 swapped=true;
-                count_assign+=3;
+                count_assign+=4;
             }
         }
         start++;
