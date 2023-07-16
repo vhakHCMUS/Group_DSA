@@ -75,7 +75,7 @@ void heapify(int* array, int size, int i, int &count_assign, int& count_compare)
     int largest=i;
     int l=2*i+1;
     int r=2*i+2;
-    count_assign+=3
+    count_assign += 3;
     count_compare+=2;
     if(l<size&&array[l]>array[largest])
     {
@@ -303,9 +303,9 @@ void mergeSort(int* array, int l, int r,int& count_assign,int& count_compare ) {
     if (count_compare++ && l < r) {
     count_assign+=3;
     int m = l + (r - l) / 2;
-    mergeSort(arr, l, m,count_assign,count_compare);
-    mergeSort(arr, m + 1, r,count_assign,count_compare);
-    merge(arr, l, m, r,count_assign,count_compare);
+    mergeSort(array, l, m,count_assign,count_compare);
+    mergeSort(array, m + 1, r,count_assign,count_compare);
+    merge(array, l, m, r,count_assign,count_compare);
   }
 }
 
@@ -341,7 +341,7 @@ void shakerSort(int* array, int size, int &count_assign, int& count_compare)
     bool swapped=true;
     int start=0;
     int end=size-1;
-    count_assign+=3
+    count_assign += 3;
     while(count_compare++&&swapped)
     {
         swapped=false;
