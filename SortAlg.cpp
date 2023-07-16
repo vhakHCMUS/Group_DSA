@@ -297,53 +297,16 @@ void merge(int* array, int l, int m, int r, int &count_assign, int& count_compar
     delete[] R;
 }
 
-//write radixSort and count the number of assignments and comparisons
-void radixSort(int* array, int size, int &count_assign, int& count_compare)
-{
+void mergeSort(int* array, int l, int r,int& count_assign,int& count_compare ) {
 	count_assign=0;
 	count_compare=0;
-    int max=array[0];
-    count_assign+=2;
-    for(int i=1;count_compare++,i<size;count_assign++,i++)
-    {
-        if(count_compare++ && array[i]>max)
-        {
-            max=array[i];
-            count_assign++;
-        }
-    }
-    count_assign++;
-    for(int exp=1;count_compare++,max/exp>0;count_assign++,exp*=10)
-    {
-        int* output=new int[size];
-        int count[10]={0};
-        count_assign+=3;
-        for(int i=0;count_compare++,i<size;count_assign++,i++)
-        {
-            count[(array[i]/exp)%10]++;
-            count_assign++;
-        }
-        count_assign++;
-        for(int i=1;count_compare++,i<10;count_assign++,i++)
-        {
-            count[i]+=count[i-1];
-            count_assign++;
-        }
-        count_assign++;
-        for(int i=size-1;count_compare++,i>=0;count_assign++,i--)
-        {
-            output[count[(array[i]/exp)%10]-1]=array[i];
-            count[(array[i]/exp)%10]--;
-            count_assign+=2;
-        }
-        count_assign++;
-        for(int i=0;count_compare++,i<size;count_assign++,i++)
-        {
-            array[i]=output[i];
-            count_assign++;
-        }
-        delete[] output;
-    }
+    if (count_compare++ && l < r) {
+    count_assign+=3;
+    int m = l + (r - l) / 2;
+    mergeSort(arr, l, m,count_assign,count_compare);
+    mergeSort(arr, m + 1, r,count_assign,count_compare);
+    merge(arr, l, m, r,count_assign,count_compare);
+  }
 }
 
 //write shellSort and count the number of assignments and comparisons
