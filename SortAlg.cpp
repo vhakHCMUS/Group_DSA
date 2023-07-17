@@ -3,8 +3,11 @@
 
 using namespace std;
 
-void selectionSort(int* array, int size, int &count_assign, int& count_compare)
+void selectionSort(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
+    //apply clock to count the time
+    clock_t start, end, total;
+    start = clock();
 	count_assign=0;
 	count_compare=0;
 	count_assign++;
@@ -24,13 +27,18 @@ void selectionSort(int* array, int size, int &count_assign, int& count_compare)
         swap(array[min],array[i]);
         count_assign+=3;
     }
+    end = clock();
+    total = end - start;
+    Time = (float)total/CLOCKS_PER_SEC;
 }
 
 //write selectionSort and count the number of assignments and comparisons
-void insertionSort(int* array, int size, int &count_assign, int& count_compare)
+void insertionSort(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
 	count_assign=0;
 	count_compare=0;
+    clock_t start, end, total;
+    start = clock();
 	count_assign++;
     for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
@@ -46,14 +54,19 @@ void insertionSort(int* array, int size, int &count_assign, int& count_compare)
         array[j+1]=key;
         count_assign++;
     }
+    end = clock();
+    total = end - start;
+    Time = (float)total/CLOCKS_PER_SEC;
 }
 
 //write bubbleSort and count the number of assignments and comparisons
-void bubbleSort(int* array, int size, int &count_assign, int& count_compare)
+void bubbleSort(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
 	count_assign=0;
 	count_compare=0;
 	count_assign++;
+    clock_t start, end, total;
+    start = clock();
     for(int i=0;count_compare++,i<size-1;count_assign++,i++)
     {
         count_assign++;
@@ -67,6 +80,9 @@ void bubbleSort(int* array, int size, int &count_assign, int& count_compare)
             }
         }
     }
+    end = clock();
+    total = end - start;
+    Time = (float)total/CLOCKS_PER_SEC;
 }
 
 //write heapSort and count the number of assignments and comparisons
@@ -96,11 +112,13 @@ void heapify(int* array, int size, int i, int &count_assign, int& count_compare)
         heapify(array,size,largest,count_assign,count_compare);
     }
 }
-void heapSort(int* array, int size, int &count_assign, int& count_compare)
+void heapSort(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
 	count_assign=0;
 	count_compare=0;
 	count_assign++;
+    clock_t start, end, total;
+    start = clock();
     for(int i=size/2-1;count_compare++,i>=0;count_assign++,i--)
     {
         heapify(array,size,i,count_assign,count_compare);
@@ -112,14 +130,19 @@ void heapSort(int* array, int size, int &count_assign, int& count_compare)
         count_assign+=3;
         heapify(array,i,0,count_assign,count_compare);
     }
+    end = clock();
+    total = end - start;
+    Time = (float)total/CLOCKS_PER_SEC;
 }
 //write countingSort and count the number of assignments and comparisons
-void countingSort(int* array, int size, int &count_assign, int& count_compare)
+void countingSort(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
 	count_assign=0;
 	count_compare=0;
     int max=array[0];
     count_assign+=2;
+    clock_t start, end, total;
+    start = clock();
     for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
         count_compare++;
@@ -155,13 +178,18 @@ void countingSort(int* array, int size, int &count_assign, int& count_compare)
         }
     }
     delete[] count;
+    end = clock();
+    total = end - start;
+    Time = (float)total/CLOCKS_PER_SEC;
 }
 
 //write radixSort and count the number of assignments and comparisons
-void radixSort(int* array, int size, int &count_assign, int& count_compare)
+void radixSort(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
 	count_assign=0;
 	count_compare=0;
+    clock_t start, end, total;
+    start = clock();
     int max=array[0];
     count_assign+=2;
     for(int i=1;count_compare++,i<size;count_assign++,i++)
@@ -204,6 +232,9 @@ void radixSort(int* array, int size, int &count_assign, int& count_compare)
         }
         delete[] output;
     }
+    end = clock();
+    total = end - start;
+    Time = (float)total/CLOCKS_PER_SEC;
 }
 
 //write quickSort and count the number of assignments and comparisons
@@ -237,7 +268,15 @@ void quickSort(int* array, int low, int high, int &count_assign, int& count_comp
         quickSort(array,pi+1,high,count_assign,count_compare);
     }
 }
+void quickSortCount(int* array, int low, int high, int &count_assign, int& count_compare, float &Time)
+{
+    clock_t start, end, total;
+    start = clock();
+    quickSort(array,low,high,count_assign,count_compare);
+    end = clock();
+    Time = (float)total/CLOCKS_PER_SEC;
 
+}
 //mergeSort and count the number of assignments and comparisons
 void merge(int* array, int l, int m, int r, int &count_assign, int& count_compare)
 {
@@ -297,7 +336,7 @@ void merge(int* array, int l, int m, int r, int &count_assign, int& count_compar
     delete[] R;
 }
 
-void mergeSort(int* array, int l, int r,int& count_assign,int& count_compare ) {
+void mergeSort(int* array, int l, int r,int& count_assign,int& count_compare) {
 	count_assign=0;
 	count_compare=0;
     if (count_compare++ && l < r) {
@@ -307,13 +346,24 @@ void mergeSort(int* array, int l, int r,int& count_assign,int& count_compare ) {
     mergeSort(array, m + 1, r,count_assign,count_compare);
     merge(array, l, m, r,count_assign,count_compare);
   }
+
 }
 
+void mergeSortCount(int* array, int l, int r, int &count_assign, int& count_compare, float& Time)
+{
+    clock_t start, end, total;
+    start = clock();
+    mergeSort(array,l,r,count_assign,count_compare);
+    end = clock();
+    Time = (float)total/CLOCKS_PER_SEC;
+}
 //write shellSort and count the number of assignments and comparisons
-void shellSort(int* array, int size, int &count_assign, int& count_compare)
+void shellSort(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
 	count_assign=0;
 	count_compare=0;
+    clock_t start, end, total;
+    start = clock();
 	count_assign++;
     for(int gap=size/2;count_compare++,gap>0;count_assign++,gap/=2)
     {
@@ -331,13 +381,18 @@ void shellSort(int* array, int size, int &count_assign, int& count_compare)
             count_assign++;
         }
     }
+    end = clock();
+    total = end - start;
+    Time = (float)total/CLOCKS_PER_SEC;
 }
 
 //write shakerSort and count the number of assignments and comparisons
-void shakerSort(int* array, int size, int &count_assign, int& count_compare)
+void shakerSort(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
 	count_assign=0;
 	count_compare=0;
+    clock_t start, end, total;
+    start = clock();
     bool swapped=true;
     int start=0;
     int end=size-1;
@@ -375,4 +430,7 @@ void shakerSort(int* array, int size, int &count_assign, int& count_compare)
         start++;
         count_assign++;
     }
+    end = clock();
+    total = end - start;
+    Time = (float)total/CLOCKS_PER_SEC;
 }
