@@ -434,3 +434,43 @@ void shakerSort(int* array, int size, int &count_assign, int& count_compare, flo
     total = end - start;
     Time = (float)total/CLOCKS_PER_SEC;
 }
+
+void SortChoosing(int* array, int size, int sortType, int &count_assign, int &count_compare, float &Time)
+{
+    switch (sortType)
+    {
+    case 1:
+        selectionSort(array, size, count_assign, count_compare, Time);
+        break;
+    case 2:
+        insertionSort(array, size, count_assign, count_compare, Time);
+        break;
+    case 3: 
+        bubbleSort(array, size, count_assign, count_compare, Time);
+        break;
+    case 4:
+        heapSort(array, size, count_assign, count_compare, Time);
+        break;
+    case 5: 
+        countingSort(array, size, count_assign, count_compare, Time);
+        break;
+    case 6:
+        radixSort(array, size, count_assign, count_compare, Time);
+        break;
+    case 7:
+        qSortCount(array, size, count_assign, count_compare, Time);
+        break;
+    case 8:
+        mergeSortCount(array, size, count_assign, count_compare, Time);
+        break;
+    case 9:
+        shellSort(array, size, count_assign, count_compare, Time);
+        break;
+    case 10:
+        shakerSort(array, size, count_assign, count_compare, Time);
+        break;
+    default:
+        break;
+
+    }
+}
