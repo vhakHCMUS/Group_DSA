@@ -79,6 +79,9 @@ void print()
                 case 10:
                     cout<<"Shaker sort"<<endl;
                     break;
+                case 11:
+                    cout<<"Flash sort"<<endl;
+                    break;
                 }
                 cout<<"Number of assignment : "<<count_assign<<endl;
                 cout<<"Number of comparison : "<<count_compare<<endl;
@@ -147,6 +150,9 @@ void print()
                 case 10:
                     cout<<"Shaker sort"<<endl;
                     break;
+                case 11:
+                    cout<<"Flash sort"<<endl;
+                    break;
                 }
                 cout<<"Number of assignment : "<<count_assign<<endl;
                 cout<<"Number of comparison : "<<count_compare<<endl;
@@ -169,7 +175,7 @@ int main()
     long long count_assign = 0;
     long long count_compare = 0;
     float Time = 0;
-    SortChoosing(array, 10, 6, count_assign, count_compare, Time);
+    SortChoosing(array, 10, 11, count_assign, count_compare, Time);
 
     for (int i = 0; i < 10; i++)
     {

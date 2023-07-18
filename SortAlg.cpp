@@ -367,75 +367,191 @@ void mergeSortCount(int* array, int size, long long& count_assign, long long& co
 //write shellSort and count the number of assignments and comparisons
 void shellSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
 {
-	count_assign=0;
-	count_compare=0;
-    clock_t start, end, total;
+    count_assign = 0;
+    count_compare = 0;
+    clock_t start, end;
     start = clock();
-	count_assign++;
-    for(int gap=size/2;count_compare++,gap>0;count_assign++,gap/=2)
+
+    // Shell sort implementation
+    for (int gap = size / 2; gap > 0; gap /= 2)
     {
-        for(int i=gap;count_compare++,i<size;count_assign++,i++)
+        for (int i = gap; i < size; ++i)
         {
-            int temp=array[i];
-            int j;
-            count_assign+=3;
-            for(j=i;(count_compare++&&j>=gap)&&(count_compare++&&array[j-gap]>temp);count_assign++,j-=gap)
+            int temp = array[i];
+            int j = i;
+
+            count_assign += 2;
+            while (j >= gap && array[j - gap] > temp)
             {
-                array[j]=array[j-gap];
-                count_assign++;
+                array[j] = array[j - gap];
+                j -= gap;
+                count_assign += 2;
+                count_compare++;
             }
-            array[j]=temp;
+
+            array[j] = temp;
             count_assign++;
+            
+            count_compare++; // Increment comparison count for the for loop
         }
     }
+
     end = clock();
-    total = end - start;
-    Time = (float)total/CLOCKS_PER_SEC;
+    Time = (float)(end - start) / CLOCKS_PER_SEC;
 }
+
 
 //write shakerSort and count the number of assignments and comparisons
 void shakerSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
 {
-	count_assign=0;
-	count_compare=0;
-    clock_t start, end, total;
+    count_assign = 0;
+    count_compare = 0;
+    clock_t start, end;
     start = clock();
-    bool swapped=true;
-    count_assign += 3;
-    int start_index=0;
-    int end_index=size-1;
-    while(count_compare++ && swapped)
+
+    // Shaker sort implementation
+    int left = 0;
+    int right = size - 1;
+    bool swapped = false;
+
+    while (left < right)
     {
-        swapped=false;
-        count_assign++;
-        for(int i=start_index;count_compare++,i<end_index;count_assign++,i++)
+        // Forward pass: move the largest element to the right
+        for (int i = left; i < right; ++i)
         {
-            if(count_compare++ && array[i]>array[i+1])
+            count_compare++;
+            if (array[i] > array[i + 1])
             {
-                swap(array[i],array[i+1]);
-                swapped=true;
-                count_assign+=3;
+                swap(array[i], array[i + 1]);
+                count_assign += 3;
+                swapped = true;
             }
+            count_assign++; // Increment assignment count for the for loop
         }
-        end_index--;
-        count_assign++;
-        for(int i=end_index-1;count_compare++,i>=start_index;count_assign++,i--)
+        --right;
+
+        // Backward pass: move the smallest element to the left
+        for (int i = right; i > left; --i)
         {
-            if(count_compare++ && array[i]>array[i+1])
+            count_compare++;
+            if (array[i - 1] > array[i])
             {
-                swap(array[i],array[i+1]);
-                swapped=true;
-                count_assign+=3;
+                swap(array[i - 1], array[i]);
+                count_assign += 3;
+                swapped = true;
             }
+            count_assign++; // Increment assignment count for the for loop
         }
-        start_index++;
-        count_assign++;
+        ++left;
+
+        // If no elements were swapped in either pass, the array is sorted
+        if (!swapped)
+            break;
+        else
+            swapped = false;
+
+        count_compare++; // Increment comparison count for the while loop
     }
+
     end = clock();
-    end = clock();
-    total = end - start;
-    Time = (float)total/CLOCKS_PER_SEC;
+    Time = (float)(end - start) / CLOCKS_PER_SEC;
 }
+void flashSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+{   
+    count_assign = 0;
+    count_compare = 0;
+    clock_t start, end;
+    start = clock();
+
+    // Flash sort implementation
+    if (size <= 1) {
+        end = clock();
+        Time = (float)(end - start) / CLOCKS_PER_SEC;
+        return;
+    }
+
+    int minVal = array[0];
+    int maxVal = array[0];
+    count_assign += 2;
+    for (int i = 1; i < size; ++i) {
+        if (array[i] < minVal) {
+            minVal = array[i];
+            count_assign++;
+        }
+        if (array[i] > maxVal) {
+            maxVal = array[i];
+            count_assign++;
+        }
+        count_compare += 2;
+    }
+
+    if (minVal == maxVal) {
+        end = clock();
+        count_compare++;
+        Time = (float)(end - start) / CLOCKS_PER_SEC;
+        return;
+    }
+
+    int m = static_cast<int>(0.45 * size);
+    int* L = new int[m]();
+    count_assign++;
+
+    for (int i = 0; i < size; ++i) {
+        int k = static_cast<int>((m - 1) * ((static_cast<double>(array[i]) - minVal) / (maxVal - minVal)));
+        L[k]++;
+        count_assign += 2;
+        count_compare++;
+    }
+
+    for (int i = 1; i < m; ++i) {
+        L[i] += L[i - 1];
+        count_assign += 2;
+        count_compare++;
+    }
+
+    int* sortedArray = new int[size];
+    count_assign++;
+    memcpy(sortedArray, array, size * sizeof(int));
+
+    int j = 0;
+    int k = m - 1;
+    int numMoves = 0;
+    count_assign += 3;
+
+    while (numMoves < size) {
+        while (j >= L[k]) {
+            --j;
+            k = static_cast<int>((m - 1) * ((static_cast<double>(sortedArray[j]) - minVal) / (maxVal - minVal)));
+            count_compare++;
+            count_assign += 2;
+        }
+
+        if (k < 0)
+            break;
+
+        int evicted = sortedArray[j];
+        count_assign++;
+
+        while (j != L[k]) {
+            k = static_cast<int>((m - 1) * ((static_cast<double>(evicted) - minVal) / (maxVal - minVal)));
+            int tmp = sortedArray[L[k] - 1];
+            sortedArray[L[k] - 1] = evicted;
+            sortedArray[j] = tmp;
+            --L[k];
+            ++numMoves;
+            count_assign += 6;
+            count_compare++;
+        }
+    }
+
+    delete[] L;
+    memcpy(array, sortedArray, size * sizeof(int));
+    delete[] sortedArray;
+
+    end = clock();
+    Time = (float)(end - start) / CLOCKS_PER_SEC;
+}
+
 
 void SortChoosing(int* array, int size, int sortType, long long& count_assign, long long& count_compare, float &Time)
 {
@@ -470,6 +586,9 @@ void SortChoosing(int* array, int size, int sortType, long long& count_assign, l
         break;
     case 10:
         shakerSort(array, size, count_assign, count_compare, Time);
+        break;
+    case 11:
+        flashSort(array, size, count_assign, count_compare, Time);
         break;
     default:
         break;

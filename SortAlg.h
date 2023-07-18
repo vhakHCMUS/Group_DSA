@@ -26,5 +26,7 @@ void shellSort(int* array, int size, long long&count_assign, long long& count_co
 
 void shakerSort(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 
+void flashSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time);
+
 void SortChoosing(int* array, int size, int sortType, long long& count_assign, long long& count_compare, float &Time);
 
