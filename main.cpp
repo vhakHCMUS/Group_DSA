@@ -169,7 +169,7 @@ int main()
     long long count_assign = 0;
     long long count_compare = 0;
     float Time = 0;
-    SortChoosing(array, 10, 9, count_assign, count_compare, Time);
+    SortChoosing(array, 10, 6, count_assign, count_compare, Time);
 
     for (int i = 0; i < 10; i++)
     {
