@@ -273,7 +273,7 @@ void qSortCount(int* array, int size, long long& count_assign, long long& count_
     int low = 0;
     int high = size-1;
     count_assign=0;
-    count_compare=0;
+    
     start = clock();
     quickSort(array,low, high, count_assign, count_compare);
     end = clock();
