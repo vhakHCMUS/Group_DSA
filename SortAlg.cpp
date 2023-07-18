@@ -456,100 +456,102 @@ void shakerSort(int* array, int size, long long& count_assign, long long& count_
     end = clock();
     Time = (float)(end - start) / CLOCKS_PER_SEC;
 }
-void flashSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
-{   
+//write flashSort and count the number of assignments and comparisons
+void flashSort(int* array, int size,long long& count_assign,long long& count_compare,float&Time) {
     count_assign = 0;
     count_compare = 0;
-    clock_t start, end;
+    clock_t start, end, total;
     start = clock();
-
-    // Flash sort implementation
-    if (size <= 1) {
+    if (++count_compare && size <= 1) {
         end = clock();
-        Time = (float)(end - start) / CLOCKS_PER_SEC;
+        total = end - start;
+        Time = (float)total / CLOCKS_PER_SEC;
         return;
     }
-
-    int minVal = array[0];
-    int maxVal = array[0];
-    count_assign += 2;
-    for (int i = 1; i < size; ++i) {
-        if (array[i] < minVal) {
-            minVal = array[i];
-            count_assign++;
-        }
-        if (array[i] > maxVal) {
-            maxVal = array[i];
-            count_assign++;
-        }
-        count_compare += 2;
-    }
-
-    if (minVal == maxVal) {
-        end = clock();
-        count_compare++;
-        Time = (float)(end - start) / CLOCKS_PER_SEC;
-        return;
-    }
-
-    int m = static_cast<int>(0.45 * size);
-    int* L = new int[m]();
-    count_assign++;
-
-    for (int i = 0; i < size; ++i) {
-        int k = static_cast<int>((m - 1) * ((static_cast<double>(array[i]) - minVal) / (maxVal - minVal)));
-        L[k]++;
-        count_assign += 2;
-        count_compare++;
-    }
-
-    for (int i = 1; i < m; ++i) {
-        L[i] += L[i - 1];
-        count_assign += 2;
-        count_compare++;
-    }
-
-    int* sortedArray = new int[size];
-    count_assign++;
-    memcpy(sortedArray, array, size * sizeof(int));
-
-    int j = 0;
-    int k = m - 1;
-    int numMoves = 0;
-    count_assign += 3;
-
-    while (numMoves < size) {
-        while (j >= L[k]) {
-            --j;
-            k = static_cast<int>((m - 1) * ((static_cast<double>(sortedArray[j]) - minVal) / (maxVal - minVal)));
-            count_compare++;
-            count_assign += 2;
-        }
-
-        if (k < 0)
-            break;
-
-        int evicted = sortedArray[j];
+    int m = size * 0.43;
+    if (count_compare++ && m <= 2) {
+        m = 2;
         count_assign++;
-
-        while (j != L[k]) {
-            k = static_cast<int>((m - 1) * ((static_cast<double>(evicted) - minVal) / (maxVal - minVal)));
-            int tmp = sortedArray[L[k] - 1];
-            sortedArray[L[k] - 1] = evicted;
-            sortedArray[j] = tmp;
-            --L[k];
-            ++numMoves;
-            count_assign += 6;
-            count_compare++;
+    }
+    
+    // int m = n;
+    int* __L = new int[m];
+    count_assign++;
+    for (int i = 0; count_compare++, i < m; count_assign++, ++i) {
+        __L[i] = 0;
+        count_assign++;
+    }
+    int Mx = array[0], Mn = array[0];
+    count_assign += 3;
+    for (int i = 1;count_compare++, i < size;count_assign++, ++i) {
+        if (count_compare++ && Mx < array[i]) {
+            Mx = array[i];
+            count_assign++;
+        }
+        if (count_compare++ && Mn > array[i]) {
+            Mn = array[i];
+            count_assign++;
         }
     }
-
-    delete[] L;
-    memcpy(array, sortedArray, size * sizeof(int));
-    delete[] sortedArray;
-
+    if (count_compare++ && Mx == Mn) {
+        end = clock();
+        total = end - start;
+        Time = (float)total / CLOCKS_PER_SEC;
+        return;
+    }
+        
+#define getK(x) 1ll * (m - 1) * (x - Mn) / (Mx - Mn)
+    count_assign++;
+    for (int i = 0; count_compare++, i < size; count_assign++, ++i) {
+        ++__L[getK(array[i])];
+        count_assign++;
+    }
+    count_assign++;
+    for (int i = 1; count_compare++, i < m; count_assign++, ++i) {
+        __L[i] += __L[i - 1];
+        count_assign++;
+    }
+    //step 2
+    int count = 0;
+    int i = 0;
+    count_assign += 2;
+    while (count_compare++ && count < size) {
+        int k = getK(array[i]);
+        count_assign++;
+        while (count_compare++ && i >= __L[k])
+            k = getK(array[++i]);
+        int z = array[i];
+        count_assign += 2;
+        while (count_compare++ && i != __L[k]) {
+            k = getK(z);
+            int y = array[__L[k] - 1];
+            array[--__L[k]] = z;
+            z = y;
+            ++count;
+            count_assign += 5;
+        }
+    }
+    //step 3
+    count_assign++;
+    for (int k = 1;count_compare++, k < m;count_assign++, ++k) {
+        count_assign++;
+        for (int i = __L[k] - 2;count_compare++, i >= __L[k - 1];count_assign++, --i)
+            if (count_compare++ && array[i] > array[i + 1]) {
+                int t = array[i], j = i;
+                count_assign += 2;
+                while (count_compare++ && t > array[j + 1]) { 
+                array[j] = array[j + 1]; 
+                ++j;
+                count_assign += 2;
+            }
+                array[j] = t;
+                count_assign++;
+        }
+    }
+    delete[]__L;
     end = clock();
-    Time = (float)(end - start) / CLOCKS_PER_SEC;
+    total = end - start;
+    Time = (float)total / CLOCKS_PER_SEC;
 }
 
 
