@@ -65,16 +65,15 @@ void bubbleSort(int* array, int size, int &count_assign, int& count_compare, flo
 {
 	count_assign=0;
 	count_compare=0;
-	count_assign++;
     clock_t start, end, total;
     start = clock();
+	count_assign++;
     for(int i=0;count_compare++,i<size-1;count_assign++,i++)
     {
         count_assign++;
         for(int j=0;count_compare++,j<size-i-1;count_assign++,j++)
         {
-            count_compare++;
-            if(array[j]>array[j+1])
+            if(count_compare++ && array[j]>array[j+1])
             {
                 swap(array[j],array[j+1]);
                 count_assign+=3;
@@ -93,20 +92,18 @@ void heapify(int* array, int size, int i, int &count_assign, int& count_compare)
     int l=2*i+1;
     int r=2*i+2;
     count_assign += 3;
-    count_compare+=2;
-    if(l<size&&array[l]>array[largest])
+    if((count_compare++ && l<size) &&(count_compare++ && array[l]>array[largest]))
     {
         largest=l;
         count_assign++;
     }
     count_compare+=2;
-    if(r<size&&array[r]>array[largest])
+    if((count_compare++ && r<size)&&(count_compare++ && array[r]>array[largest]))
     {
         largest=r;
         count_assign++;
     }
-    count_compare++;
-    if(largest!=i)
+    if(count_compare++ && largest!=i)
     {
         swap(array[i],array[largest]);
         count_assign+=4;
@@ -117,16 +114,16 @@ void heapSort(int* array, int size, int &count_assign, int& count_compare, float
 {
 	count_assign=0;
 	count_compare=0;
-	count_assign++;
     clock_t start, end, total;
     start = clock();
+	count_assign++;
     for(int i=size/2-1;count_compare++,i>=0;count_assign++,i--)
     {
         heapify(array,size,i,count_assign,count_compare);
     }
-    for(int i=size-1;i>=0;i--)
+	count_assign++;
+    for(int i=size-1;count_compare++,i>=0;count_assign++,i--)
     {
-        count_compare++;
         swap(array[0],array[i]);
         count_assign+=3;
         heapify(array,i,0,count_assign,count_compare);
@@ -146,8 +143,7 @@ void countingSort(int* array, int size, int &count_assign, int& count_compare, f
     start = clock();
     for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
-        count_compare++;
-        if(array[i]>max)
+        if(count_compare++ && array[i]>max)
         {
             max=array[i];
             count_assign++;
@@ -170,7 +166,7 @@ void countingSort(int* array, int size, int &count_assign, int& count_compare, f
     count_assign+=2;
     for(int i=0;count_compare++,i<max+1;count_assign++,i++)
     {
-        while(count_compare++&&count[i]>0)
+        while(count_compare++ && count[i]>0)
         {
             array[index]=i;
             index++;
@@ -305,8 +301,7 @@ void merge(int* array, int l, int m, int r, int &count_assign, int& count_compar
     count_assign+=3;
     while((count_compare++&&i<n1)&&(count_compare++&&j<n2))
     {
-        count_compare++;
-        if(L[i]<=R[j])
+        if(count_compare++ && L[i]<=R[j])
         {
             array[k]=L[i];
             i++;
@@ -372,6 +367,7 @@ void shellSort(int* array, int size, int &count_assign, int& count_compare, floa
 	count_assign++;
     for(int gap=size/2;count_compare++,gap>0;count_assign++,gap/=2)
     {
+	count_assign++;
         for(int i=gap;count_compare++,i<size;count_assign++,i++)
         {
             int temp=array[i];
@@ -405,25 +401,25 @@ void shakerSort(int* array, int size, int &count_assign, int& count_compare, flo
     while(count_compare++ && swapped)
     {
         swapped=false;
-        count_assign++;
+        count_assign+=2;
         for(int i=start_index;count_compare++,i<end_index;count_assign++,i++)
         {
             if(count_compare++ && array[i]>array[i+1])
             {
                 swap(array[i],array[i+1]);
                 swapped=true;
-                count_assign+=3;
+                count_assign+=4;
             }
         }
         end_index--;
-        count_assign++;
+        count_assign+=2;
         for(int i=end_index-1;count_compare++,i>=start_index;count_assign++,i--)
         {
             if(count_compare++ && array[i]>array[i+1])
             {
                 swap(array[i],array[i+1]);
                 swapped=true;
-                count_assign+=3;
+                count_assign+=4;
             }
         }
         start_index++;
