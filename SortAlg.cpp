@@ -1,5 +1,6 @@
 #include "SortAlg.h"
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
@@ -268,9 +269,11 @@ void quickSort(int* array, int low, int high, int &count_assign, int& count_comp
         quickSort(array,pi+1,high,count_assign,count_compare);
     }
 }
-void quickSortCount(int* array, int low, int high, int &count_assign, int& count_compare, float &Time)
+void qSortCount(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
     clock_t start, end, total;
+    int low = 0;
+    int high = size-1;
     start = clock();
     quickSort(array,low,high,count_assign,count_compare);
     end = clock();
@@ -349,9 +352,11 @@ void mergeSort(int* array, int l, int r,int& count_assign,int& count_compare) {
 
 }
 
-void mergeSortCount(int* array, int l, int r, int &count_assign, int& count_compare, float& Time)
+void mergeSortCount(int* array, int size, int &count_assign, int& count_compare, float& Time)
 {
     clock_t start, end, total;
+    int l = 0;
+    int r = size-1;
     start = clock();
     mergeSort(array,l,r,count_assign,count_compare);
     end = clock();
@@ -394,42 +399,37 @@ void shakerSort(int* array, int size, int &count_assign, int& count_compare, flo
     clock_t start, end, total;
     start = clock();
     bool swapped=true;
-    int start=0;
-    int end=size-1;
     count_assign += 3;
-    while(count_compare++&&swapped)
+    int start_index=0;
+    int end_index=size-1;
+    while(count_compare++ && swapped)
     {
         swapped=false;
-        count_assign+=2;
-        for(int i=start;count_compare++,i<end;count_assign++,i++)
+        count_assign++;
+        for(int i=start_index;count_compare++,i<end_index;count_assign++,i++)
         {
             if(count_compare++ && array[i]>array[i+1])
             {
                 swap(array[i],array[i+1]);
                 swapped=true;
-                count_assign+=4;
+                count_assign+=3;
             }
         }
-        if(count_compare++&&!swapped)
+        end_index--;
+        count_assign++;
+        for(int i=end_index-1;count_compare++,i>=start_index;count_assign++,i--)
         {
-            break;
-        }
-        swapped=false;
-        end--;
-        count_assign+=3;
-        for(int i=end-1;count_compare++,i>=start;count_assign++,i--)
-        {
-            count_compare++;
-            if(array[i]>array[i+1])
+            if(count_compare++ && array[i]>array[i+1])
             {
                 swap(array[i],array[i+1]);
                 swapped=true;
-                count_assign+=4;
+                count_assign+=3;
             }
         }
-        start++;
+        start_index++;
         count_assign++;
     }
+    end = clock();
     end = clock();
     total = end - start;
     Time = (float)total/CLOCKS_PER_SEC;

@@ -12,13 +12,13 @@ void countingSort(int* array, int size, int &count_assign, int& count_compare, f
 
 void radixSort(int* array, int size, int &count_assign, int& count_compare, float& Time);
 
-void quickSort(int* array, int size, int &count_assign, int& count_compare);
-
 void qSortCount(int* array, int size, int &count_assign, int& count_compare, float& Time);
 
-void mergeSort(int* array, int size, int &count_assign, int& count_compare);
-
 void mergeSortCount(int* array, int size, int &count_assign, int& count_compare, float& Time);
+
+void quickSort(int* array, int size, int &count_assign, int& count_compare);
+
+void mergeSort(int* array, int size, int &count_assign, int& count_compare);
 
 void radixSort(int* array, int size, int &count_assign, int& count_compare, float& Time);
 
