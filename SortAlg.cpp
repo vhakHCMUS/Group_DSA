@@ -277,6 +277,7 @@ void qSortCount(int* array, int size, long long& count_assign, long long& count_
     start = clock();
     quickSort(array,low, high, count_assign, count_compare);
     end = clock();
+	total = end - start;
     Time = (float)total/CLOCKS_PER_SEC;
 
 }
@@ -360,6 +361,7 @@ void mergeSortCount(int* array, int size, long long& count_assign, long long& co
     start = clock();
     mergeSort(array,l,r,count_assign,count_compare);
     end = clock();
+	total = end - start;
     Time = (float)total/CLOCKS_PER_SEC;
 }
 //write shellSort and count the number of assignments and comparisons
