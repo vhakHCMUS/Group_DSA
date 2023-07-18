@@ -20,7 +20,70 @@ int main()
             {
                 GenerateData(array, dataSize, dataType);
                 SortChoosing(array, dataSize, sortType, count_assign, count_compare, Time);
-                cout << "Data type: " << dataType << " Data size: " << dataSize << " Sort type: " << sortType << " Assign: " << count_assign << " Compare: " << count_compare << " Time: " << Time << endl;
+                /*
+                write with this format 
+                Data type : Nearly Sorted
+                Data size : 10000
+                Sort type : Bubble sort
+                Number of assignment : 100
+                Number of comparison : 100
+                Time : 0.0001
+                */
+                cout<<"Data type : ";
+                switch (dataType)
+                {
+                case 0:
+                    cout<<"Random"<<endl;
+                    break;
+                case 1:
+                    cout<<"Sorted"<<endl;
+                    break;
+                case 2:
+                    cout<<"Reverse"<<endl;
+                    break;
+                case 3:
+                    cout<<"Nearly Sorted"<<endl;
+                    break;
+                }
+                cout<<"Data size : "<<dataSize<<endl;
+                cout<<"Sort type : ";
+                switch (sortType)
+                {
+                case 1:
+                    cout<<"Selection sort"<<endl;
+                    break;
+                case 2:
+                    cout<<"Insertion sort"<<endl;
+                    break;
+                case 3:
+                    cout<<"Bubble sort"<<endl;
+                    break;
+                case 4:
+                    cout<<"Heap sort"<<endl;
+                    break;
+                case 5:
+                    cout<<"Counting sort"<<endl;
+                    break;
+                case 6:
+                    cout<<"Radix sort"<<endl;
+                    break;
+                case 7:
+                    cout<<"Quick sort"<<endl;
+                    break;
+                case 8:
+                    cout<<"Merge sort"<<endl;
+                    break;
+                case 9:
+                    cout<<"Shell sort"<<endl;
+                    break;
+                case 10:
+                    cout<<"Shaker sort"<<endl;
+                    break;
+                }
+                cout<<"Number of assignment : "<<count_assign<<endl;
+                cout<<"Number of comparison : "<<count_compare<<endl;
+                cout<<"Time : "<<Time<<endl;
+                cout<<"---------------------------------"<<endl;
             }
             delete[] array;
         }
@@ -34,7 +97,7 @@ int main()
             {
                 GenerateData(array, dataSize, dataType);
                 SortChoosing(array, dataSize, sortType, count_assign, count_compare, Time);
-                cout << "Data type: " << dataType << " Data size: " << dataSize << " Sort type: " << sortType << " Assign: " << count_assign << " Compare: " << count_compare << " Time: " << Time << endl;
+               
             }
             delete[] array;
         }
