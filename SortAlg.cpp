@@ -259,7 +259,7 @@ int partition(int* array, int low, int high, long long& count_assign, long long&
 }
 void quickSort(int* array, int low, int high, long long& count_assign, long long& count_compare)
 {
-    if(count_compare++ && low<high)
+    if(++count_compare && low<high)
     {
         int pi=partition(array,low,high,count_assign,count_compare);
         count_assign+=3;
@@ -273,7 +273,7 @@ void qSortCount(int* array, int size, long long& count_assign, long long& count_
     int low = 0;
     int high = size-1;
     count_assign=0;
-    
+    count_compare=0;
     start = clock();
     quickSort(array,low, high, count_assign, count_compare);
     end = clock();
@@ -342,7 +342,7 @@ void merge(int* array, int l, int m, int r, long long& count_assign, long long& 
 void mergeSort(int* array, int l, int r, long long& count_assign, long long& count_compare) {
 	count_assign=0;
 	count_compare=0;
-    if (count_compare++ && l < r) {
+    if (++count_compare && l < r) {
     count_assign+=3;
     int m = l + (r - l) / 2;
     mergeSort(array, l, m,count_assign,count_compare);
