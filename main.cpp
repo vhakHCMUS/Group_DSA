@@ -96,7 +96,7 @@ void print()
             long long count_assign = 0;
             long long count_compare = 0;
             float Time = 0;
-            for (int sortType = 1; sortType <= 10; sortType++)
+            for (int sortType = 1; sortType <= 11; sortType++)
             {
                 GenerateData(array, dataSize, dataType);
                 SortChoosing(array, dataSize, sortType, count_assign, count_compare, Time);
@@ -165,25 +165,5 @@ void print()
 }
 int main()
 {
-    int array[10];
-    GenerateData(array, 10, 0);
-    for (int i = 0; i < 10; i++)
-    {
-        cout<<array[i]<<" ";
-    }
-    cout<<endl;
-    long long count_assign = 0;
-    long long count_compare = 0;
-    float Time = 0;
-    SortChoosing(array, 10, 11, count_assign, count_compare, Time);
-
-    for (int i = 0; i < 10; i++)
-    {
-        cout<<array[i]<<" ";
-    }
-    cout<<endl;
-    cout<<"Number of assignment : "<<count_assign<<endl;
-    cout<<"Number of comparison : "<<count_compare<<endl;
-    cout<<"Time : "<<Time<<endl;
-    cout<<"---------------------------------"<<endl;
+    print();
 }
