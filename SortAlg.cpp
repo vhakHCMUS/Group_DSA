@@ -239,24 +239,69 @@ void radixSort(int* array, int size, long long& count_assign, long long& count_c
 }
 
 //write quickSort and count the number of assignments and comparisons
+int medianOfThree(int* array, int low, int high, long long& count_compare)
+{
+    int mid = low + (high - low) / 2;
+
+    // Compare array[low], array[mid], and array[high], and return the median index.
+    if (count_compare++, array[low] <= array[mid])
+    {
+        if (count_compare++, array[mid] <= array[high])
+        {
+            return mid;
+        }
+        else if (count_compare++, array[low] <= array[high])
+        {
+            return high;
+        }
+        return low;
+    }
+    else
+    {
+        if (count_compare++, array[low] <= array[high])
+        {
+            return low;
+        }
+        else if (count_compare++, array[mid] <= array[high])
+        {
+            return high;
+        }
+        return mid;
+    }
+}
+
+void swap(int& a, int& b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
 int partition(int* array, int low, int high, long long& count_assign, long long& count_compare)
 {
-    int pivot=array[high];
-    int i=low-1;
-    count_assign+=3;
-    for(int j=low;count_compare++,j<=high-1;count_assign++,j++)
+    int pivotIdx = medianOfThree(array, low, high, count_compare);
+    swap(array[pivotIdx], array[high]);
+    int pivot = array[high];
+
+    int i = low - 1;
+    count_assign += 3;
+
+    for (int j = low; count_compare++, j <= high - 1; count_assign++, j++)
     {
-        if(count_compare++ && array[j]<=pivot)
+        if (count_compare++, array[j] <= pivot)
         {
             i++;
-            swap(array[i],array[j]);
-            count_assign+=4;
+            swap(array[i], array[j]);
+            count_assign += 4;
         }
     }
-    swap(array[i+1],array[high]);
-    count_assign+=3;
-    return i+1;
+
+    swap(array[i + 1], array[high]);
+    count_assign += 3;
+
+    return i + 1;
 }
+
 void quickSort(int* array, int low, int high, long long& count_assign, long long& count_compare)
 {
     if(++count_compare && low<high)
