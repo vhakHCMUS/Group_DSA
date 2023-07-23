@@ -1,169 +1,128 @@
 #include <iostream>
+#include "function.h"
 #include "DataGenerator.h"
 #include "SortAlg.h"
 
 using namespace std;
 
-void print()
+int main(int argc, char* argv[])
 {
-        freopen("output.txt", "w", stdout);
-    for (int dataType = 0; dataType < 4 ; dataType++)
+    if (argc < 5)
     {
-        /* Data Size Examine the selected sorting algorithms on data of the following sizes: 10,000, 30,000, 50,000, 100,000, 300,000, and 500,000 elements.*/
-        for (int dataSize = 10000; dataSize <= 50000; dataSize += 20000)
+        cout << "Not found command line!\n";
+        return 1;
+    }
+
+    string mode = argv[1];
+    
+
+    if (mode == "-a")
+    {
+        string algorithm = argv[2];
+        long long count_assign = 0;
+        long long count_compare = 0;
+        float Time = 0;
+        if (argc == 5)
         {
-            int* array = new int[dataSize];
-            long long count_assign = 0;
-            long long count_compare = 0;
-            float Time = 0;
-            for (int sortType = 1; sortType <= 11; sortType++)
+            if (!isalpha(argv[3][0]))
             {
-                GenerateData(array, dataSize, dataType);
-                SortChoosing(array, dataSize, sortType, count_assign, count_compare, Time);
-                /*
-                write with this format 
-                Data type : Nearly Sorted
-                Data size : 10000
-                Sort type : Bubble sort
-                Number of assignment : 100
-                Number of comparison : 100
-                Time : 0.0001
-                */
-                cout<<"Data type : ";
-                switch (dataType)
-                {
-                case 0:
-                    cout<<"Random"<<endl;
-                    break;
-                case 1:
-                    cout<<"Sorted"<<endl;
-                    break;
-                case 2:
-                    cout<<"Reverse"<<endl;
-                    break;
-                case 3:
-                    cout<<"Nearly Sorted"<<endl;
-                    break;
-                }
-                cout<<"Data size : "<<dataSize<<endl;
-                cout<<"Sort type : ";
-                switch (sortType)
-                {
-                case 1:
-                    cout<<"Selection sort"<<endl;
-                    break;
-                case 2:
-                    cout<<"Insertion sort"<<endl;
-                    break;
-                case 3:
-                    cout<<"Bubble sort"<<endl;
-                    break;
-                case 4:
-                    cout<<"Heap sort"<<endl;
-                    break;
-                case 5:
-                    cout<<"Counting sort"<<endl;
-                    break;
-                case 6:
-                    cout<<"Radix sort"<<endl;
-                    break;
-                case 7:
-                    cout<<"Quick sort"<<endl;
-                    break;
-                case 8:
-                    cout<<"Merge sort"<<endl;
-                    break;
-                case 9:
-                    cout<<"Shell sort"<<endl;
-                    break;
-                case 10:
-                    cout<<"Shaker sort"<<endl;
-                    break;
-                case 11:
-                    cout<<"Flash sort"<<endl;
-                    break;
-                }
-                cout<<"Number of assignment : "<<count_assign<<endl;
-                cout<<"Number of comparison : "<<count_compare<<endl;
-                cout<<"Time : "<<Time<<endl;
-                cout<<"---------------------------------"<<endl;
+                string input_size_line = argv[3];
+                long long input_size = stoll(input_size_line);
+                string output_param = argv[4];
+                long long count_assign_1 = 0;
+                long long count_compare_1 = 0;
+                float Time_1 = 0;
+                long long count_assign_2 = 0;
+                long long count_compare_2 = 0;
+                float Time_2 = 0;
+                long long count_assign_3 = 0;
+                long long count_compare_3 = 0;
+                float Time_3 = 0;
+                long long count_assign_4 = 0;
+                long long count_compare_4 = 0;
+                float Time_4 = 0;
+                int *array_ran = new int[input_size];
+                int *array_nsort = new int[input_size];
+                int *array_sort = new int[input_size];
+                int *array_rev = new int[input_size];
+                use_command3(algorithm, output_param, input_size, count_assign_1, count_compare_1, Time_1, count_assign_2, count_compare_2, Time_2, count_assign_3, count_compare_3, Time_3, count_assign_4, count_compare_4, Time_4, array_ran, array_nsort, array_sort, array_rev);
             }
-            delete[] array;
+            else 
+            { 
+                string input_file = argv[3];
+                string output_param = argv[4];
+                ifstream file(input_file);
+
+                if (!file.is_open())
+                {
+                    cout << "File not found!\n";
+                    return 1;
+                }
+                
+                long long input_size = 0;
+                file >> input_size;
+                int *array = new int[input_size];
+
+                use_command1(file, algorithm, input_file, output_param, input_size, count_assign, count_compare, Time, array);
+                file.close();
+            }
+           
         }
-        for (int dataSize = 100000; dataSize <= 500000; dataSize += 200000)
-            {
-            int* array = new int[dataSize];
-            long long count_assign = 0;
-            long long count_compare = 0;
-            float Time = 0;
-            for (int sortType = 1; sortType <= 11; sortType++)
-            {
-                GenerateData(array, dataSize, dataType);
-                SortChoosing(array, dataSize, sortType, count_assign, count_compare, Time);
-                               cout<<"Data type : ";
-                switch (dataType)
-                {
-                case 0:
-                    cout<<"Random"<<endl;
-                    break;
-                case 1:
-                    cout<<"Sorted"<<endl;
-                    break;
-                case 2:
-                    cout<<"Reverse"<<endl;
-                    break;
-                case 3:
-                    cout<<"Nearly Sorted"<<endl;
-                    break;
-                }
-                cout<<"Data size : "<<dataSize<<endl;
-                cout<<"Sort type : ";
-                switch (sortType)
-                {
-                case 1:
-                    cout<<"Selection sort"<<endl;
-                    break;
-                case 2:
-                    cout<<"Insertion sort"<<endl;
-                    break;
-                case 3:
-                    cout<<"Bubble sort"<<endl;
-                    break;
-                case 4:
-                    cout<<"Heap sort"<<endl;
-                    break;
-                case 5:
-                    cout<<"Counting sort"<<endl;
-                    break;
-                case 6:
-                    cout<<"Radix sort"<<endl;
-                    break;
-                case 7:
-                    cout<<"Quick sort"<<endl;
-                    break;
-                case 8:
-                    cout<<"Merge sort"<<endl;
-                    break;
-                case 9:
-                    cout<<"Shell sort"<<endl;
-                    break;
-                case 10:
-                    cout<<"Shaker sort"<<endl;
-                    break;
-                case 11:
-                    cout<<"Flash sort"<<endl;
-                    break;
-                }
-                cout<<"Number of assignment : "<<count_assign<<endl;
-                cout<<"Number of comparison : "<<count_compare<<endl;
-                cout<<"Time : "<<Time<<endl;
-                cout<<"---------------------------------"<<endl;
-            }
-            delete[] array;
+        else if (argc == 6)
+        {
+            string input_size_line = argv[3];
+            long long input_size = stoll(input_size_line);
+            string input_order = argv[4];
+            string output_param = argv[5];
+            int *array = new int[input_size];
+
+            use_command2(algorithm, input_order, output_param, input_size, count_assign, count_compare, Time,  array);
+
         }
     }
+    else if (mode == "-c")
+    {
+        string algorithm_1 = argv[2];
+        string algorithm_2 = argv[3];
+        long long count_assign_1 = 0;
+        long long count_compare_1 = 0;
+        float Time_1 = 0;
+        long long count_assign_2 = 0;
+        long long count_compare_2= 0;
+        float Time_2 = 0;
+
+        if (argc == 5)
+        {
+            string input_file = argv[4];
+            ifstream file(input_file);
+            if (!file.is_open())
+            {
+                cout << "File not found!\n";
+                return 1;
+            }
+            
+            long long input_size = 0;
+            file >> input_size;
+            
+            int *array_1 = new int[input_size];
+            int *array_2 = new int[input_size];
+
+            use_command4(file, algorithm_1, algorithm_2, input_file, input_size, count_assign_1, count_compare_1, Time_1, count_assign_2, count_compare_2, Time_2, array_1, array_2);
+            file.close();
+        }
+        else if (argc == 6)
+        {
+            string input_size_line = argv[4];
+            long long input_size = stoll(input_size_line);
+            string input_order = argv[5];
+            int *array_1 = new int[input_size];
+            int *array_2 = new int[input_size];
+
+            use_command5(algorithm_1, algorithm_2, input_order, input_size, count_assign_1, count_compare_1, Time_1, count_assign_2, count_compare_2, Time_2, array_1, array_2);
+        }
+    }
+
+    return 0; 
 }
-int main()
-{
-    print();
-}
+
+
