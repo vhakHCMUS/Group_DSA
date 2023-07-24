@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void selectionSortTime(int* array, int size, long long &count_assign, long long& count_compare, float& Time)
+void selectionSortTime(int* array, int size, float& Time)
 {
     //apply clock to count the time
     clock_t start, end, total;
@@ -27,11 +27,9 @@ void selectionSortTime(int* array, int size, long long &count_assign, long long&
     Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void selectionSort(int* array, int size, long long &count_assign, long long& count_compare, float& Time)
+void selectionSort(int* array, int size, long long &count_assign, long long& count_compare)
 {
     //apply clock to count the time
-    clock_t start, end, total;
-    start = clock();
 	count_assign=0;
 	count_compare=0;
 	count_assign++;
@@ -51,12 +49,9 @@ void selectionSort(int* array, int size, long long &count_assign, long long& cou
         swap(array[min],array[i]);
         count_assign+=3;
     }
-    end = clock();
-    total = end - start;
-    Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void insertionSortTime(int* array, int size, long long&count_assign, long long& count_compare, float& Time)
+void insertionSortTime(int* array, int size, float& Time)
 {
     clock_t start, end, total;
     start = clock();
@@ -76,12 +71,10 @@ void insertionSortTime(int* array, int size, long long&count_assign, long long& 
     Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void insertionSort(int* array, int size, long long&count_assign, long long& count_compare, float& Time)
+void insertionSort(int* array, int size, long long&count_assign, long long& count_compare)
 {
 	count_assign=0;
 	count_compare=0;
-    clock_t start, end, total;
-    start = clock();
 	count_assign++;
     for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
@@ -97,12 +90,9 @@ void insertionSort(int* array, int size, long long&count_assign, long long& coun
         array[j+1]=key;
         count_assign++;
     }
-    end = clock();
-    total = end - start;
-    Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void bubbleSortTime(int* array, int size, long long &count_assign, long long& count_compare, float& Time)
+void bubbleSortTime(int* array, int size, float& Time)
 {
     clock_t start, end, total;
     start = clock();
@@ -121,13 +111,11 @@ void bubbleSortTime(int* array, int size, long long &count_assign, long long& co
     Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void bubbleSort(int* array, int size, long long &count_assign, long long& count_compare, float& Time)
+void bubbleSort(int* array, int size, long long &count_assign, long long& count_compare)
 {
 	count_assign=0;
 	count_compare=0;
 	count_assign++;
-    clock_t start, end, total;
-    start = clock();
     for(int i=0;count_compare++,i<size-1;count_assign++,i++)
     {
         count_assign++;
@@ -141,12 +129,9 @@ void bubbleSort(int* array, int size, long long &count_assign, long long& count_
             }
         }
     }
-    end = clock();
-    total = end - start;
-    Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void heapifyTime(int* array, int size, int i, long long& count_assign, long long& count_compare)
+void heapifyTime(int* array, int size, int i)
 {
     int largest=i;
     int l=2*i+1;
@@ -162,21 +147,21 @@ void heapifyTime(int* array, int size, int i, long long& count_assign, long long
     if(largest!=i)
     {
         swap(array[i],array[largest]);
-        heapify(array,size,largest,count_assign,count_compare);
+        heapifyTime(array,size,largest);
     }
 }
-void heapSortTime(int* array, int size, long long & count_assign, long long& count_compare, float& Time)
+void heapSortTime(int* array, int size, float& Time)
 {
     clock_t start, end, total;
     start = clock();
     for(int i=size/2-1;i>=0;i--)
     {
-        heapifyTime(array,size,i,count_assign,count_compare);
+        heapifyTime(array,size,i);
     }
     for(int i=size-1;i>=0;i--)
     {
         swap(array[0],array[i]);
-        heapifyTime(array,i,0,count_assign,count_compare);
+        heapifyTime(array,i,0);
     }
     end = clock();
     total = end - start;
@@ -209,13 +194,11 @@ void heapify(int* array, int size, int i, long long& count_assign, long long& co
         heapify(array,size,largest,count_assign,count_compare);
     }
 }
-void heapSort(int* array, int size, long long & count_assign, long long& count_compare, float& Time)
+void heapSort(int* array, int size, long long & count_assign, long long& count_compare)
 {
 	count_assign=0;
 	count_compare=0;
 	count_assign++;
-    clock_t start, end, total;
-    start = clock();
     for(int i=size/2-1;count_compare++,i>=0;count_assign++,i--)
     {
         heapify(array,size,i,count_assign,count_compare);
@@ -227,12 +210,9 @@ void heapSort(int* array, int size, long long & count_assign, long long& count_c
         count_assign+=3;
         heapify(array,i,0,count_assign,count_compare);
     }
-    end = clock();
-    total = end - start;
-    Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void countingSortTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void countingSortTime(int* array, int size, float& Time)
 {
     int max=array[0];
     clock_t start, end, total;
@@ -269,14 +249,12 @@ void countingSortTime(int* array, int size, long long& count_assign, long long& 
     Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void countingSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void countingSort(int* array, int size, long long& count_assign, long long& count_compare)
 {
 	count_assign=0;
 	count_compare=0;
     int max=array[0];
     count_assign+=2;
-    clock_t start, end, total;
-    start = clock();
     for(int i=1;count_compare++,i<size;count_assign++,i++)
     {
         count_compare++;
@@ -312,13 +290,10 @@ void countingSort(int* array, int size, long long& count_assign, long long& coun
         }
     }
     delete[] count;
-    end = clock();
-    total = end - start;
-    Time = (float)total/CLOCKS_PER_SEC;
 }
 
 //write radixSort and count the number of assignments and comparisons
-void radixSortTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void radixSortTime(int* array, int size, float& Time)
 {
     clock_t start, end, total;
     start = clock();
@@ -358,12 +333,10 @@ void radixSortTime(int* array, int size, long long& count_assign, long long& cou
     Time = (float)total/CLOCKS_PER_SEC;
 }
 
-void radixSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void radixSort(int* array, int size, long long& count_assign, long long& count_compare)
 {
 	count_assign=0;
 	count_compare=0;
-    clock_t start, end, total;
-    start = clock();
     int max=array[0];
     count_assign+=2;
     for(int i=1;count_compare++,i<size;count_assign++,i++)
@@ -406,12 +379,74 @@ void radixSort(int* array, int size, long long& count_assign, long long& count_c
         }
         delete[] output;
     }
-    end = clock();
+}
+
+//write quickSort and count the number of assignments and comparisons
+int medianOfThreeTime(int* array, int low, int high) 
+{
+	int mid = low + (high - low) / 2;
+
+    // Compare array[low], array[mid], and array[high], and return the median index.
+    if ( array[low] <= array[mid])
+    {
+        if ( array[mid] <= array[high])
+        {
+            return mid;
+        }
+        else if ( array[low] <= array[high])
+        {
+            return high;
+        }
+        return low;
+    }
+    else
+    {
+        if ( array[low] <= array[high])
+        {
+            return low;
+        }
+        else if ( array[mid] <= array[high])
+        {
+            return high;
+        }
+        return mid;
+    }
+}
+int partitionTime(int* array, int low, int high)
+{
+    int pivotIdx = medianOfThreeTime(array, low, high);
+    swap(array[pivotIdx], array[high]);
+    int pivot = array[high];
+
+    int i = low - 1;
+    for (int j = low; j <= high - 1;  j++)
+    {
+        if ( array[j] <= pivot)
+        {
+            i++;
+            swap(array[i], array[j]);
+        }
+    }
+
+    swap(array[i + 1], array[high]);
+
+    return i + 1;
+}
+void quickSortTime(int* array, int low, int high, float&Time)
+{
+	clock_t start, end, total;
+    start = clock();
+    if( low<high)
+    {
+        int pi=partitionTime(array,low,high);
+        quickSort(array,low,pi-1);
+        quickSort(array,pi+1,high);
+    }
+	end = clock();
     total = end - start;
     Time = (float)total/CLOCKS_PER_SEC;
 }
 
-//write quickSort and count the number of assignments and comparisons
 int medianOfThree(int* array, int low, int high, long long& count_compare)
 {
     int mid = low + (high - low) / 2;
@@ -477,6 +512,8 @@ int partition(int* array, int low, int high, long long& count_assign, long long&
 
 void quickSort(int* array, int low, int high, long long& count_assign, long long& count_compare)
 {
+	count_compare=0;
+	count_assign=0;
     if(++count_compare && low<high)
     {
         int pi=partition(array,low,high,count_assign,count_compare);
@@ -485,21 +522,67 @@ void quickSort(int* array, int low, int high, long long& count_assign, long long
         quickSort(array,pi+1,high,count_assign,count_compare);
     }
 }
-void qSortCount(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+//mergeSort and count the number of assignments and comparisons
+void mergeTime(int* array, int l, int m, int r, float& time)
 {
-    clock_t start, end, total;
-    int low = 0;
-    int high = size-1;
-    count_assign=0;
-    count_compare=0;
+    int n1=m-l+1;
+    int n2=r-m;
+    int* L=new int[n1];
+    int* R=new int[n2];
+    for(int i=0;i<n1;i++)
+    {
+        L[i]=array[l+i];
+    }
+    for(int i=0;i<n2;i++)
+    {
+        R[i]=array[m+1+i];
+    }
+    int i=0;
+    int j=0;
+    int k=l;
+    while( i<n1 && j<n2 )
+    {
+        if(L[i]<=R[j])
+        {
+            array[k]=L[i];
+            i++;
+        }
+        else
+        {
+            array[k]=R[j];
+            j++;
+        }
+        k++;
+    }
+    while( i<n1)
+    {
+        array[k]=L[i];
+        i++;
+        k++;
+    }
+    while( j<n2)
+    {
+        array[k]=R[j];
+        j++;
+        k++;
+    }
+    delete[] L;
+    delete[] R;
+}
+
+void mergeSortTime(int* array, int l, int r, float& Time) {
+  clock_t start, end, total;
     start = clock();
-    quickSort(array,low, high, count_assign, count_compare);
+    if ( l < r) {
+    int m = l + (r - l) / 2;
+    mergeSort(array, l, m,count_assign,count_compare);
+    mergeSort(array, m + 1, r,count_assign,count_compare);
+    merge(array, l, m, r,count_assign,count_compare);
+  }
     end = clock();
 	total = end - start;
     Time = (float)total/CLOCKS_PER_SEC;
-
 }
-//mergeSort and count the number of assignments and comparisons
 void merge(int* array, int l, int m, int r, long long& count_assign, long long& count_compare)
 {
     int n1=m-l+1;
@@ -568,27 +651,13 @@ void mergeSort(int* array, int l, int r, long long& count_assign, long long& cou
     mergeSort(array, m + 1, r,count_assign,count_compare);
     merge(array, l, m, r,count_assign,count_compare);
   }
-
-}
-
-void mergeSortCount(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
-{
-    clock_t start, end, total;
-    int l = 0;
-    int r = size-1;
-    start = clock();
-    mergeSort(array,l,r,count_assign,count_compare);
-    end = clock();
-	total = end - start;
-    Time = (float)total/CLOCKS_PER_SEC;
 }
 //write shellSort and count the number of assignments and comparisons
 
-void shellSortTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void shellSortTime(int* array, int size, float& Time)
 {
     clock_t start, end;
     start = clock();
-
     // Shell sort implementation
     for (int gap = size / 2; gap > 0; gap /= 2)
     {
@@ -610,53 +679,43 @@ void shellSortTime(int* array, int size, long long& count_assign, long long& cou
     end = clock();
     Time = (float)(end - start) / CLOCKS_PER_SEC;
 }
-void shellSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void shellSort(int* array, int size, long long& count_assign, long long& count_compare)
 {
     count_assign = 0;
     count_compare = 0;
-    clock_t start, end;
-    start = clock();
-
     // Shell sort implementation
-    for (int gap = size / 2; gap > 0; gap /= 2)
+	count_assign++;
+    for (int gap = size / 2;count_compare++, gap > 0;count_assign++, gap /= 2)
     {
-        for (int i = gap; i < size; ++i)
+	count_assgin++;
+        for (int i = gap;count_compare++, i < size;count_assign++, ++i)
         {
             int temp = array[i];
             int j = i;
-
             count_assign += 2;
-            while (j >= gap && array[j - gap] > temp)
+            while ((++count_compare &&j >= gap) && (count_compare++ && array[j - gap] > temp))
             {
                 array[j] = array[j - gap];
                 j -= gap;
                 count_assign += 2;
-                count_compare++;
             }
 
             array[j] = temp;
             count_assign++;
-            
-            count_compare++; // Increment comparison count for the for loop
         }
     }
-
-    end = clock();
-    Time = (float)(end - start) / CLOCKS_PER_SEC;
 }
 
 
 //write shakerSort and count the number of assignments and comparisons
-void shakerSortTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void shakerSortTime(int* array, int size, float& Time)
 {
     clock_t start, end;
     start = clock();
-
     // Shaker sort implementation
     int left = 0;
     int right = size - 1;
     bool swapped = false;
-
     while (left < right)
     {
         // Forward pass: move the largest element to the right
@@ -693,62 +752,55 @@ void shakerSortTime(int* array, int size, long long& count_assign, long long& co
     Time = (float)(end - start) / CLOCKS_PER_SEC;
 }
 
-void shakerSort(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void shakerSort(int* array, int size, long long& count_assign, long long& count_compare)
 {
     count_assign = 0;
     count_compare = 0;
-    clock_t start, end;
-    start = clock();
-
     // Shaker sort implementation
     int left = 0;
     int right = size - 1;
     bool swapped = false;
-
-    while (left < right)
+	count_assign+=3;
+    while (++count_compare && left < right)
     {
         // Forward pass: move the largest element to the right
-        for (int i = left; i < right; ++i)
+	count_assign++;
+        for (int i = left;count_compare++, i < right;count_assign++, ++i)
         {
-            count_compare++;
-            if (array[i] > array[i + 1])
+            if (count_compare++ && array[i] > array[i + 1])
             {
                 swap(array[i], array[i + 1]);
-                count_assign += 3;
+                count_assign += 4;
                 swapped = true;
             }
-            count_assign++; // Increment assignment count for the for loop
         }
         --right;
-
         // Backward pass: move the smallest element to the left
-        for (int i = right; i > left; --i)
+	count_assign++;
+        for (int i = right;count_compare++, i > left;count_assign++, --i)
         {
             count_compare++;
             if (array[i - 1] > array[i])
             {
                 swap(array[i - 1], array[i]);
-                count_assign += 3;
+                count_assign += 4;
                 swapped = true;
             }
-            count_assign++; // Increment assignment count for the for loop
         }
         ++left;
-
+	count_assign++;
         // If no elements were swapped in either pass, the array is sorted
-        if (!swapped)
+        if (count_compare++ && !swapped)
             break;
         else
+	{
             swapped = false;
-
-        count_compare++; // Increment comparison count for the while loop
+		count_assign++;
+	}
     }
-
-    end = clock();
-    Time = (float)(end - start) / CLOCKS_PER_SEC;
 }
 //write flashSort and count the number of assignments and comparisons
-void flashSortTime(int* array, int size,long long& count_assign,long long& count_compare,float&Time) {
+void flashSortTime(int* array, int size, float&Time) {
     clock_t start, end, total;
     start = clock();
     if ( size <= 1) {
@@ -827,15 +879,10 @@ void flashSortTime(int* array, int size,long long& count_assign,long long& count
     total = end - start;
     Time = (float)total / CLOCKS_PER_SEC;
 }
-void flashSort(int* array, int size,long long& count_assign,long long& count_compare,float&Time) {
+void flashSort(int* array, int size,long long& count_assign,long long& count_compare) {
     count_assign = 0;
     count_compare = 0;
-    clock_t start, end, total;
-    start = clock();
     if (++count_compare && size <= 1) {
-        end = clock();
-        total = end - start;
-        Time = (float)total / CLOCKS_PER_SEC;
         return;
     }
     int m = size * 0.43;
@@ -843,7 +890,6 @@ void flashSort(int* array, int size,long long& count_assign,long long& count_com
         m = 2;
         count_assign++;
     }
-    
     // int m = n;
     int* __L = new int[m];
     count_assign++;
@@ -864,9 +910,6 @@ void flashSort(int* array, int size,long long& count_assign,long long& count_com
         }
     }
     if (count_compare++ && Mx == Mn) {
-        end = clock();
-        total = end - start;
-        Time = (float)total / CLOCKS_PER_SEC;
         return;
     }
         
@@ -919,51 +962,90 @@ void flashSort(int* array, int size,long long& count_assign,long long& count_com
         }
     }
     delete[]__L;
-    end = clock();
-    total = end - start;
-    Time = (float)total / CLOCKS_PER_SEC;
 }
 
-
-void SortChoosing(int* array, int size, int sortType, long long& count_assign, long long& count_compare, float &Time)
+void SortChoosing(int* array, int size, int sortType, long long& count_assign, long long& count_compare)
 {
     switch (sortType)
     {
     case 1:
-        selectionSort(array, size, count_assign, count_compare, Time);
+        selectionSort(array, size, count_assign, count_compare);
         break;
     case 2:
-        insertionSort(array, size, count_assign, count_compare, Time);
+        insertionSort(array, size, count_assign, count_compare);
         break;
     case 3: 
-        bubbleSort(array, size, count_assign, count_compare, Time);
+        bubbleSort(array, size, count_assign, count_compare);
         break;
     case 4:
-        heapSort(array, size, count_assign, count_compare, Time);
+        heapSort(array, size, count_assign, count_compare);
         break;
     case 5: 
-        countingSort(array, size, count_assign, count_compare, Time);
+        countingSort(array, size, count_assign, count_compare);
         break;
     case 6:
-        radixSort(array, size, count_assign, count_compare, Time);
+        radixSort(array, size, count_assign, count_compare);
         break;
     case 7:
-        qSortCount(array, size, count_assign, count_compare, Time);
+        quickSort(array, size, count_assign, count_compare);
         break;
     case 8:
-        mergeSortCount(array, size, count_assign, count_compare, Time);
+        mergeSort(array, size, count_assign, count_compare);
         break;
     case 9:
-        shellSort(array, size, count_assign, count_compare, Time);
+        shellSort(array, size, count_assign, count_compare);
         break;
     case 10:
-        shakerSort(array, size, count_assign, count_compare, Time);
+        shakerSort(array, size, count_assign, count_compare);
         break;
     case 11:
-        flashSort(array, size, count_assign, count_compare, Time);
+        flashSort(array, size, count_assign, count_compare);
         break;
     default:
         break;
 
     }
 }
+void SortChoosingTime(int* array, int size, int sortType, float &Time)
+{
+    switch (sortType)
+    {
+    case 1:
+        selectionSortTime(array, size, Time);
+        break;
+    case 2:
+        insertionSortTime(array, size, Time);
+        break;
+    case 3: 
+        bubbleSortTime(array, size, Time);
+        break;
+    case 4:
+        heapSortTime(array, size, Time);
+        break;
+    case 5: 
+        countingSortTime(array, size, Time);
+        break;
+    case 6:
+        radixSortTime(array, size, Time);
+        break;
+    case 7:
+        quickSortTime(array, size, Time);
+        break;
+    case 8:
+        mergeSortTime(array, size, Time);
+        break;
+    case 9:
+        shellSortTime(array, size, Time);
+        break;
+    case 10:
+        shakerSortTime(array, size, Time);
+        break;
+    case 11:
+        flashSortTime(array, size, Time);
+        break;
+    default:
+        break;
+
+    }
+}
+
