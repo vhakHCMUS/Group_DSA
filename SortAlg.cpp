@@ -541,7 +541,7 @@ int partition(int* array, int low, int high, long long& count_assign, long long&
     return i + 1;
 }
 
-void quickSort(int* array, int low, int high, long long& count_assign, long long& count_compare)
+void quickSort(int* array, int low, int high, long long& count_assign, long long& count_compare,float& Time)
 {
 	count_compare=0;
 	count_assign=0;
@@ -672,7 +672,7 @@ void merge(int* array, int l, int m, int r, long long& count_assign, long long& 
     delete[] R;
 }
 
-void mergeSort(int* array, int l, int r, long long& count_assign, long long& count_compare) {
+void mergeSort(int* array, int l, int r, long long& count_assign, long long& count_compare,float& Time) {
 	count_assign=0;
 	count_compare=0;
     if (++count_compare && l < r) {
