@@ -536,25 +536,35 @@ int partition(int* array, int low, int high, long long& count_assign, long long&
     return i + 1;
 }
 
-void quickSortCount(int* array, int low, int high, long long& count_assign, long long& count_compare, float& Time)
+void quickSort(int* array, int low, int high, long long& count_assign, long long& count_compare, float& Time)
 {
-    count_compare = 0;
-    count_assign = 0;
     if (++count_compare && low < high)
     {
         int pi = partition(array, low, high, count_assign, count_compare);
         count_assign += 3;
-        quickSortCount(array, low, pi - 1, count_assign, count_compare, Time);
-        quickSortCount(array, pi + 1, high, count_assign, count_compare, Time);
+        quickSort(array, low, pi - 1, count_assign, count_compare, Time);
+        quickSort(array, pi + 1, high, count_assign, count_compare, Time);
     }
+}
+void quickSortCount(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+{
+    clock_t start, end, total;
+    int low = 0;
+    int high = size - 1;
+    start = clock();
+    count_compare = 0;
+    count_assign = 0;
+    quickSort(array, low, high, count_assign, count_compare,Time);
+    end = clock();
+    total = end - start;
+    Time = (float)total / CLOCKS_PER_SEC;
+
 }
 void quickSortCountTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
 {
     clock_t start, end, total;
     int low = 0;
     int high = size - 1;
-    count_assign = 0;
-    count_compare = 0;
     start = clock();
     quickSortTime(array, low, high, count_assign, count_compare);
     end = clock();
@@ -563,7 +573,7 @@ void quickSortCountTime(int* array, int size, long long& count_assign, long long
 
 }
 //mergeSort and count the number of assignments and comparisons
-void mergeTime(int* array, int l, int m, int r, float& time)
+void mergeTime(int* array, int l, int m, int r)
 {
     int n1 = m - l + 1;
     int n2 = r - m;
@@ -615,7 +625,7 @@ void mergeSortTime(int* array, int l, int r, long long& count_assign, long long&
         int m = l + (r - l) / 2;
         mergeSortTime(array, l, m, count_assign, count_compare);
         mergeSortTime(array, m + 1, r, count_assign, count_compare);
-        merge(array, l, m, r, count_assign, count_compare);
+        mergeTime(array, l, m, r);
     }
 }
 void merge(int* array, int l, int m, int r, long long& count_assign, long long& count_compare)
