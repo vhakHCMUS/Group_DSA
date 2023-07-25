@@ -468,7 +468,7 @@ void quickSortTime(int* array, int low, int high, long long& count_assign, long 
     if (low < high)
     {
         int pi = partitionTime(array, low, high);
-        quickSortTime(array, low, pi - 1,count_assign,count_compare);
+        quickSortTime(array, low, pi - 1, count_assign, count_compare);
         quickSortTime(array, pi + 1, high, count_assign, count_compare);
     }
 }
@@ -544,8 +544,8 @@ void quickSortCount(int* array, int low, int high, long long& count_assign, long
     {
         int pi = partition(array, low, high, count_assign, count_compare);
         count_assign += 3;
-        quickSortCount(array, low, pi - 1, count_assign, count_compare,Time);
-        quickSortCount(array, pi + 1, high, count_assign, count_compare,Time);
+        quickSortCount(array, low, pi - 1, count_assign, count_compare, Time);
+        quickSortCount(array, pi + 1, high, count_assign, count_compare, Time);
     }
 }
 void quickSortCountTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
@@ -679,11 +679,11 @@ void merge(int* array, int l, int m, int r, long long& count_assign, long long& 
 void mergeSortCount(int* array, int l, int r, long long& count_assign, long long& count_compare, float& Time) {
     count_assign = 0;
     count_compare = 0;
-    if (++count_compare&& l < r) {
+    if (++count_compare && l < r) {
         count_assign += 3;
         int m = l + (r - l) / 2;
-        mergeSort(array, l, m, count_assign, count_compare,Time);
-        mergeSort(array, m + 1, r, count_assign, count_compare,Time);
+        mergeSortCount(array, l, m, count_assign, count_compare, Time);
+        mergeSortCount(array, m + 1, r, count_assign, count_compare, Time);
         merge(array, l, m, r, count_assign, count_compare);
     }
 }
@@ -729,7 +729,7 @@ void shellSort(int* array, int size, long long& count_assign, long long& count_c
 {
     count_assign = 0;
     count_compare = 0;
-    clock_t start, end,total;
+    clock_t start, end, total;
     start = clock();
     // Shell sort implementation
     count_assign++;
