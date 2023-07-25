@@ -1038,10 +1038,10 @@ void SortChoosing(int* array, int size, int sortType, long long& count_assign, l
         radixSort(array, size, count_assign, count_compare, Time);
         break;
     case 7:
-        quickSort(array, size, count_assign, count_compare, Time);
+        quickSortCount(array, size, count_assign, count_compare, Time);
         break;
     case 8:
-        mergeSort(array, size, count_assign, count_compare, Time);
+        mergeSortCount(array, size, count_assign, count_compare, Time);
         break;
     case 9:
         shellSort(array, size, count_assign, count_compare, Time);
