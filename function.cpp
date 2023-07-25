@@ -30,48 +30,48 @@ int command1(ifstream &file, string algorithm, string input_file, string output_
 
     if (algorithm == "selection-sort")
     {
-        selectionSort(array, input_size, count_assign, count_compare, Time);
+        selectionSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "insertion-sort")
     {
-        insertionSort(array, input_size, count_assign, count_compare, Time);
+        insertionSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "bubble-sort")
     {
-        bubbleSort(array, input_size, count_assign, count_compare, Time);
+        bubbleSortTime(array, input_size, count_assign, count_compare, Time);
     } 
     else if (algorithm == "heap-sort")
     {
-        heapSort(array, input_size, count_assign, count_compare, Time);
+        heapSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "counting-sort")
     {
-        countingSort(array, input_size, count_assign, count_compare, Time);
+        countingSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "radix-sort")
     {
-        radixSort(array, input_size, count_assign, count_compare, Time);
+        radixSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "quick-sort")
     {
-        qSortCount(array, input_size, count_assign, count_compare, Time);
+        quickSortCountTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "merge-sort")
     {
-        mergeSortCount(array, input_size, count_assign, count_compare, Time);
+        mergeSortCountTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "shell-sort")
     {
-        shellSort(array, input_size, count_assign, count_compare, Time);
+        shellSortTime(array, input_size, count_assign, count_compare, Time);
     
     }
     else if (algorithm == "shaker-sort")
     {
-        shakerSort(array, input_size, count_assign, count_compare, Time);
+        shakerSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "flash-sort")
     {
-        flashSort(array, input_size, count_assign, count_compare, Time);
+        flashSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else return 2;
 
@@ -180,51 +180,50 @@ int command2(string algorithm, string output_param, long long input_size,  long 
 
     if (algorithm == "selection-sort")
     {
-        selectionSort(array, input_size, count_assign, count_compare, Time);
+        selectionSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "insertion-sort")
     {
-        insertionSort(array, input_size, count_assign, count_compare, Time);
+        insertionSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "bubble-sort")
     {
-        bubbleSort(array, input_size, count_assign, count_compare, Time);
+        bubbleSortTime(array, input_size, count_assign, count_compare, Time);
     } 
     else if (algorithm == "heap-sort")
     {
-        heapSort(array, input_size, count_assign, count_compare, Time);
+        heapSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "counting-sort")
     {
-        countingSort(array, input_size, count_assign, count_compare, Time);
+        countingSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "radix-sort")
     {
-        radixSort(array, input_size, count_assign, count_compare, Time);
+        radixSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "quick-sort")
     {
-        qSortCount(array, input_size, count_assign, count_compare, Time);
+        quickSortCountTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "merge-sort")
     {
-        mergeSortCount(array, input_size, count_assign, count_compare, Time);
+        mergeSortCountTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "shell-sort")
     {
-        shellSort(array, input_size, count_assign, count_compare, Time);
+        shellSortTime(array, input_size, count_assign, count_compare, Time);
     
     }
     else if (algorithm == "shaker-sort")
     {
-        shakerSort(array, input_size, count_assign, count_compare, Time);
+        shakerSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "flash-sort")
     {
-        flashSort(array, input_size, count_assign, count_compare, Time);
+        flashSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else return 2;
-
     return 0;
 
 }
@@ -329,50 +328,50 @@ int generate_multiple_file(string algorithm, string output_param, long long inpu
 
 void sort_array(string algorithm, long long input_size,  long long &count_assign, long long &count_compare, float &Time, int* &array)
 {
-     if (algorithm == "selection-sort")
+    if (algorithm == "selection-sort")
     {
-        selectionSort(array, input_size, count_assign, count_compare, Time);
+        selectionSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "insertion-sort")
     {
-        insertionSort(array, input_size, count_assign, count_compare, Time);
+        insertionSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "bubble-sort")
     {
-        bubbleSort(array, input_size, count_assign, count_compare, Time);
+        bubbleSortTime(array, input_size, count_assign, count_compare, Time);
     } 
     else if (algorithm == "heap-sort")
     {
-        heapSort(array, input_size, count_assign, count_compare, Time);
+        heapSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "counting-sort")
     {
-        countingSort(array, input_size, count_assign, count_compare, Time);
+        countingSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "radix-sort")
     {
-        radixSort(array, input_size, count_assign, count_compare, Time);
+        radixSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "quick-sort")
     {
-        qSortCount(array, input_size, count_assign, count_compare, Time);
+        quickSortCountTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "merge-sort")
     {
-        mergeSortCount(array, input_size, count_assign, count_compare, Time);
+        mergeSortCountTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "shell-sort")
     {
-        shellSort(array, input_size, count_assign, count_compare, Time);
+        shellSortTime(array, input_size, count_assign, count_compare, Time);
     
     }
     else if (algorithm == "shaker-sort")
     {
-        shakerSort(array, input_size, count_assign, count_compare, Time);
+        shakerSortTime(array, input_size, count_assign, count_compare, Time);
     }
     else if (algorithm == "flash-sort")
     {
-        flashSort(array, input_size, count_assign, count_compare, Time);
+        flashSortTime(array, input_size, count_assign, count_compare, Time);
     }
 }
 

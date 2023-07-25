@@ -694,7 +694,7 @@ void mergeSort(int* array, int l, int r, long long& count_assign, long long& cou
         merge(array, l, m, r, count_assign, count_compare);
     }
 }
-void mergeSortCount(int* array,int size long long& count_assign, long long& count_compare, float& Time) {
+void mergeSortCount(int* array,int size, long long& count_assign, long long& count_compare, float& Time) {
     count_assign = 0;
     count_compare = 0;
 clock_t start, end, total;
