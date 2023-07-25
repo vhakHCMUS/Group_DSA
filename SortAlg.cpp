@@ -1000,88 +1000,45 @@ void flashSort(int* array, int size,long long& count_assign,long long& count_com
     delete[]__L;
 }
 
-void SortChoosing(int* array, int size, int sortType, long long& count_assign, long long& count_compare)
+void SortChoosing(int* array, int size, int sortType, long long& count_assign, long long& count_compare,float&Time)
 {
     switch (sortType)
     {
     case 1:
-        selectionSort(array, size, count_assign, count_compare);
+        selectionSort(array, size, count_assign, count_compare,Time);
         break;
     case 2:
-        insertionSort(array, size, count_assign, count_compare);
+        insertionSort(array, size, count_assign, count_compare,Time);
         break;
     case 3: 
-        bubbleSort(array, size, count_assign, count_compare);
+        bubbleSort(array, size, count_assign, count_compare,Time);
         break;
     case 4:
-        heapSort(array, size, count_assign, count_compare);
+        heapSort(array, size, count_assign, count_compare,Time);
         break;
     case 5: 
-        countingSort(array, size, count_assign, count_compare);
+        countingSort(array, size, count_assign, count_compare,Time);
         break;
     case 6:
-        radixSort(array, size, count_assign, count_compare);
+        radixSort(array, size, count_assign, count_compare,Time);
         break;
     case 7:
-        quickSort(array, size, count_assign, count_compare);
+        quickSort(array, size, count_assign, count_compare,Time);
         break;
     case 8:
-        mergeSort(array, size, count_assign, count_compare);
+        mergeSort(array, size, count_assign, count_compare,Time);
         break;
     case 9:
-        shellSort(array, size, count_assign, count_compare);
+        shellSort(array, size, count_assign, count_compare,Time);
         break;
     case 10:
-        shakerSort(array, size, count_assign, count_compare);
+        shakerSort(array, size, count_assign, count_compare,Time);
         break;
     case 11:
-        flashSort(array, size, count_assign, count_compare);
+        flashSort(array, size, count_assign, count_compare,Time);
         break;
     default:
         break;
 
     }
 }
-void SortChoosingTime(int* array, int size, int sortType, float &Time)
-{
-    switch (sortType)
-    {
-    case 1:
-        selectionSortTime(array, size, Time);
-        break;
-    case 2:
-        insertionSortTime(array, size, Time);
-        break;
-    case 3: 
-        bubbleSortTime(array, size, Time);
-        break;
-    case 4:
-        heapSortTime(array, size, Time);
-        break;
-    case 5: 
-        countingSortTime(array, size, Time);
-        break;
-    case 6:
-        radixSortTime(array, size, Time);
-        break;
-    case 7:
-        quickSortTime(array, size, Time);
-        break;
-    case 8:
-        mergeSortTime(array, size, Time);
-        break;
-    case 9:
-        shellSortTime(array, size, Time);
-        break;
-    case 10:
-        shakerSortTime(array, size, Time);
-        break;
-    case 11:
-        flashSortTime(array, size, Time);
-        break;
-    default:
-        break;
-
-    }
-}
-
