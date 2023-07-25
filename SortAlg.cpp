@@ -689,8 +689,8 @@ void mergeSort(int* array, int l, int r, long long& count_assign, long long& cou
     if (++count_compare && l < r) {
         count_assign += 3;
         int m = l + (r - l) / 2;
-        mergeSortCount(array, l, m, count_assign, count_compare, Time);
-        mergeSortCount(array, m + 1, r, count_assign, count_compare, Time);
+        mergeSort(array, l, m, count_assign, count_compare, Time);
+        mergeSort(array, m + 1, r, count_assign, count_compare, Time);
         merge(array, l, m, r, count_assign, count_compare);
     }
 }
