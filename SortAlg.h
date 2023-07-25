@@ -16,21 +16,23 @@ void heapSortTime(int* array, int size, long long & count_assign, long long& cou
 
 void heapSort(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 
+void countingSortTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time);
+
 void countingSort(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 
 void radixSortTime(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 
-void radixSort(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
-
 void quickSortTime(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
+
+void quickSortCount(int* array, int size, long long&count_assign, long long& count_compare,float& Time);
+
+void quickSortCountTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
 
 void mergeSortCountTime(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 
 void mergeSortTime(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 
-void quickSort(int* array, int size, long long&count_assign, long long& count_compare,float& Time);
-
-void mergeSort(int* array, int size, long long&count_assign, long long& count_compare,float& Time);
+void mergeSortCount(int* array, int size, long long&count_assign, long long& count_compare,float& Time);
 
 void radixSortTime(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 
