@@ -536,7 +536,7 @@ int partition(int* array, int low, int high, long long& count_assign, long long&
     return i + 1;
 }
 
-void quickSort(int* array, int low, int high, long long& count_assign, long long& count_compare, float& Time)
+void quickSortCount(int* array, int low, int high, long long& count_assign, long long& count_compare, float& Time)
 {
     count_compare = 0;
     count_assign = 0;
@@ -544,11 +544,11 @@ void quickSort(int* array, int low, int high, long long& count_assign, long long
     {
         int pi = partition(array, low, high, count_assign, count_compare);
         count_assign += 3;
-        quickSort(array, low, pi - 1, count_assign, count_compare,Time);
-        quickSort(array, pi + 1, high, count_assign, count_compare,Time);
+        quickSortCount(array, low, pi - 1, count_assign, count_compare,Time);
+        quickSortCount(array, pi + 1, high, count_assign, count_compare,Time);
     }
 }
-void qSortCount(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void quickSortCountTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
 {
     clock_t start, end, total;
     int low = 0;
@@ -676,7 +676,7 @@ void merge(int* array, int l, int m, int r, long long& count_assign, long long& 
     delete[] R;
 }
 
-void mergeSort(int* array, int l, int r, long long& count_assign, long long& count_compare, float& Time) {
+void mergeSortCount(int* array, int l, int r, long long& count_assign, long long& count_compare, float& Time) {
     count_assign = 0;
     count_compare = 0;
     if (++count_compare&& l < r) {
@@ -687,7 +687,7 @@ void mergeSort(int* array, int l, int r, long long& count_assign, long long& cou
         merge(array, l, m, r, count_assign, count_compare);
     }
 }
-void mergeSortCount(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void mergeSortCountTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
 {
     clock_t start, end, total;
     int l = 0;
