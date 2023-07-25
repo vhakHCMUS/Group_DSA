@@ -685,10 +685,7 @@ void merge(int* array, int l, int m, int r, long long& count_assign, long long& 
     delete[] L;
     delete[] R;
 }
-
-void mergeSortCount(int* array, int l, int r, long long& count_assign, long long& count_compare, float& Time) {
-    count_assign = 0;
-    count_compare = 0;
+void mergeSort(int* array, int l, int r, long long& count_assign, long long& count_compare, float& Time) {
     if (++count_compare && l < r) {
         count_assign += 3;
         int m = l + (r - l) / 2;
@@ -696,6 +693,17 @@ void mergeSortCount(int* array, int l, int r, long long& count_assign, long long
         mergeSortCount(array, m + 1, r, count_assign, count_compare, Time);
         merge(array, l, m, r, count_assign, count_compare);
     }
+}
+void mergeSortCount(int* array,int size long long& count_assign, long long& count_compare, float& Time) {
+    count_assign = 0;
+    count_compare = 0;
+clock_t start, end, total;
+int l=0;
+int r=size-1;
+    mergeSort(array,l,r,count_assign,count_compare,Time);
+ end = clock();
+    total = end - start;
+    Time = (float)total / CLOCKS_PER_SEC;
 }
 void mergeSortCountTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
 {
