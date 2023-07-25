@@ -24,9 +24,9 @@ void radixSortTime(int* array, int size, long long&count_assign, long long& coun
 
 void quickSortTime(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 
-void quickSortCount(int* array, int size, long long&count_assign, long long& count_compare,float& Time);
+void qSortCount(int* array, int size, long long&count_assign, long long& count_compare,float& Time);
 
-void quickSortCountTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void quickSortCountTime(int* array, int size, long long& count_assign, long long& count_compare, float& Time);
 
 void mergeSortCountTime(int* array, int size, long long&count_assign, long long& count_compare, float& Time);
 

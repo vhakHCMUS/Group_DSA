@@ -546,7 +546,7 @@ void quickSort(int* array, int low, int high, long long& count_assign, long long
         quickSort(array, pi + 1, high, count_assign, count_compare, Time);
     }
 }
-void quickSortCount(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
+void qSortCount(int* array, int size, long long& count_assign, long long& count_compare, float& Time)
 {
     clock_t start, end, total;
     int low = 0;
@@ -1048,7 +1048,7 @@ void SortChoosing(int* array, int size, int sortType, long long& count_assign, l
         radixSort(array, size, count_assign, count_compare, Time);
         break;
     case 7:
-        quickSortCount(array, size, count_assign, count_compare, Time);
+        qSortCount(array, size, count_assign, count_compare, Time);
         break;
     case 8:
         mergeSortCount(array, size, count_assign, count_compare, Time);
