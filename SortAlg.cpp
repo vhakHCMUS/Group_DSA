@@ -14,7 +14,6 @@ void selectionSortTime(int* array, int size, long long& count_assign, long long&
         int min = i;
         for (int j = i + 1; j < size; j++)
         {
-            count_compare++;
             if (array[j] < array[min])
             {
                 min = j;
